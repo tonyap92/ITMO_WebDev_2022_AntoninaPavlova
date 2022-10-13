@@ -8,40 +8,23 @@
   <link type="text/css" rel="stylesheet" href="./style.css">
 </head>
 <body class="bg-slate-500">
-<article class="flex flex-col w-96 bg-neutral-50 p-6 mx-auto rounded-lg mt-12 bg-hero-pattern">
+<article class="flex flex-col w-80 mt-12 p-6 mx-auto bg-gray-800 bg-hero-pattern bg-right rounded-lg">
   <header class="flex flex-row justify-between items-center">
-    <span style="content: url('https://api.iconify.design/icon-park-solid/youtube.svg?color=red&width=52');">icon</span>
-    <div class="px-4 py-1 bg-green-200 text-green-500 text-xs font-bold rounded-2xl h-full">Free</div>
+    <div class="basis-2/3">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAD4AAAA/CAIAAAA3/+y2AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAvXSURBVGhD7ZoJcBvVGcflSz5jxw52bMfS7kpyfIXENCQp10yhLQPtEKCZQGFaJmQSCC0tNAkDCTM9QkMIM6GUo6WQcAcSR3v4IJ7YITSXTZgQDM7p+JJkHbuSr9iWde17/d6ubWxhJzDI1nSG9V87z6u33/vtt9/73reSNHqaoWgjRRHRlImhjTRjpA0GmjFAO5qijIyeUds0tOlChjbRlIGiRg4CuoFigJuhKaqQLjDR2UZ6toFON1KzTPr0wqhpliLSnk/PMdF5RlpvAGYaOEd8qtFTBnA8+V+XU6xLLDfELTbFXmuKXVIYs7QwdpkpWopRFLvUFLvYGFdGa036WQYqF6hVbtXrcBcKjLrMxcVJv1s57+WnSt/bWr5n+yLQ3u3l0dRzC/c8t3Dv9mve3HLNM48Wr7x1zqKiVIM+R/E8iRkNwxQC95Ki+Gf/UPjJ6+Vn9pS0skXtfKGi+VFUG29qJSo8by5q+rBMeKF43Yqrri5MY6g8hd6ogVAxzUtYfXti49uLOzla5DMkPkXkk0WyT42iXEKykyjFSdoZnYLhnS2m227IZAoyDLReRaeLCjTb1qVfNJfY2Sw3l+DmYtycxsPHePjYKErkNSCJB5gYyayRanIPvla2anluoS7ZSM9T0akFlOb1JzM7WJ2TS5cIeiwozNDMS1Sk+DHGDehV2Ud3lj56b34pnWSkIWYU9KsZzVubMzu5PLg1gO7h4z18XJihmZebj5X4ONgTsRqxcs7xncWP35d3NZNopHOVaUrTgL5zU0YHm+vkUyRO5YZ9uK2oSJqAXvSn+3Ivgw7cP6BHQldAX0AD+uz/V/Rdm39Aj7R+QL+CIAcniHwSVBAuPtXJzxqTsrAnSnyC+7ubvTy64Rvo4edPIdKzW4B9jAcWPD7BxaXa9mV2VMxt36dvM9Ot+/Sq2vfld5qz7GyayGmVK4yReA3sJ1qbXNOIri7U3VysxCaJ1XR/422+8w/7Ljzma9nou/iE7+IGRev8Z+50HzCJwiw3H6dwRw0d+ox0U9E9XJzDnOE5dGvA9iL21WPfMew7gX2fYf8J7G/E/v14aIfnyE124SqRjwdowk3OiiWaYDlc0+R1IokF/8V6WK2dK+g9+Qi6dBjLToR6ZXkQy4MIhPoxvoD7/mM5cJOVn+vik9TKZIR7RtHHhlRGJV6HKGdTnTULBlq24WArRl6EQkhGRGQLYtTuvfiMrfY6R7XOJcCs1QI9qWb5K5fWkUWHyNaAyB1Xjkh8op2b03345wHnOxiLGMsYA7HygjbyYdRiOfJw/4nbhxqvc9bkO0jCiZcEqMVJ0H9teTJFNmCAeEzkiItPsQhMX9MaNHgA4x7ghj8i8vIj5JEHGpo/ut/fuhZb19jry218lksAx5OIv+JkncZYBzn4DMv+pf3tW3Hoc4z7MAJPE79jEip9KNTS2/J2c+0qv2cb9u6wHb2jU9A7hSQS7t9C04gOeb2Ly3YeWeGVPsS4HeMhBRoiBWHZD1M2FDh28eimC4c3BoYrMK6SmtZbahY5+bToo3v4BAvklqYNoYFGjLoxDoxEC7kAPw51hPp2N3/0gKv5pZD/U4ybvNadXXW3OPnZ33LBni50WNhdXJKtunSw7QUcgNwyrMxLlRs0jAJnfK3PNPF3B6T9KNSJkQP3f+I6eq+dz5F4rZuLI2vCN8yO1zShx0HFYjNnuv/7M7/0AUIiyYMEXJmgJNAHQsMn3Z/9/kLtr0O+L7B8Ccle5D/X99UGR02hk4Ox4mcUnRgigiHjIGQ7OHrg1Gp0qQ7JPUiGtKhuSk4MSoHueuAeOP0UTFaEAigURMgWsPzDVf/jLi6TOH4mMwwxVAn+JkM6+MzOj5YNdW7D/s8xukSCRN1QCFyO/K3DHXu+EFbinjew3I6QT1mlXLi3QmxYYRF0DrKyzji6JJCGjcuxfbzc696D5Q4se0eCBTYEk1XyDzVaTzx7/tCjOFCLURdCkOMBvQcHjru/2tBRVWbnUt1CuP0wRRY9hiyEI+i63lMbgwMNWPaQVKhmRYIOK2jbUN/eL/evdZ1+CaNmjNwygmiBbQAW10ttr9oO3GLnMsfKuKkUUXQuxsXBGg5FiLZTKPJaX0OBDqhbsAxBQpI5iGT3wBdD1ueba3/rdVRi3IXxgEzeImkHI1HuqZOO/8bK5ox+7BM+ypgijA4idYs5w3XwZr+HxyGPkk9gaoKg8AJdCg4c8Zx8pP3wKjlwCrgxDipvw3SAK/Ti4Nme0092VRlELskD9OMHnVjeRRJdFTw0tO3LH2x6SB48hmWIAXCnKuCGTOIZdgvWg8tdjQ9idBZjH8YhFZ1cHIbIsQ9b/inWL3Ow6R54dFIoR8TFwoMLaLrQIbe0CuU+y/M4AHEMExSggQr24P5B5Ls41PZKe/Uy8fCvsLcBsg0cV65MmQxkskpyT4Wn4W6rOddNHD/OuAo9TehQt1jM2V0f3xXoqSC5hUxKxaFqOpfF4KWjPSfXt7HzbbU3Bhx7MXKSyxtNQMpk7cW+I72n11urylxc2gT0iYo4enyHuaDn1PqQ9zgkQZIKCQ/4EuJ4CIdah6X3HYfusnA6S2Vp/+ktSoaBYjikQKvbAJbPDlpesdf/tIvNCLM/XpFEh+diN6+1VZYMd7yCAhew3E+ChKBDBEN+9GB/w1D7Xy3V1ziEbKugsx+5F/tqMLJgDE9P0IfMVSXG7AFPjbvhASuXQ2xO4fiIoYMViUtwsMnSwRtDvQIOObAMVS4sQEEsD2O5F4dagp73ej9dYWFzRS4NMndn9SJ/51+QfBJjuD+jnSGucC/ynuo/s8leZZC4KUuxSKKLnLbLnDrQeLvsrcahNhx04KCIQy4ctGJfc6Bb6PvyMWd1scimQOoQ2aQubo77k5u9ztfR8Akc7MAh50h/2Y6DTd6Ore7aEomFmUq+CBo31ghGhL3u5FIHjy7zd/3N79zld7zjd7zrd8J+p7d9e/dnq7tqrnWymYDSTUIrTuIS4Q44Dv1i4NzTPtu/fI63fY53fc73fE4469WhM6t7amk3l+gOryIjjQ5SYj1BrMzoPlDirl8s1S+V6pYq+x9BKWvjcp3cbFiwxsaG/iKf3MVlWfkC1/6F4oElUt0ysW6pWLfEU1/eXUt5hFSl8+TjRhJ99IE6zmWOd5i19n1JDnOyk01ymiE8Lv/gEy+yiU4z9EyGUxzmJBebKLEJU0GrijB6D6CTmxsvgfshRgWtW0h0C9C4/LnwrpbU6KQzkYfcnJlEH1vqFIkslGKxUEiqtWR453DBbZmoKw0XWa+PamKxcSWBWQAdOUVRXHdY4TWZphVd4/lWX22PoI+jn3F0MKSaUzmUz/HUz9eVg1OIBBXpEEdYv9b3RWe+I7rylDT2AfnIBYxezxQi6GQyKL6foO+FTr6QeXNzRgc7dxQdAmDKGADiMZEjKro6wMSe46W+e5kOk4kwhKE/fl/uAsNE9Lc2z7aYc11cCtQSl0efQREGZQUcRd9V9Pj9k6PniSq6ErtK5g6zNcMCABDwxLrNk6JTzAJK8+amrE7zPBeXSgJGyQBqGERfCo+KfmxX8WP353+NTlN0qV7z7yfmtJspB5cuskrprJwQbmVm1Q0uJzefOFGCgKnKPvxG2bqV+UVUkpHOH0GfXxDz9AMpZyoW2PhcKEtcbAKUhxIbL7FxURRxttqGWpXV2qv0VS+W3XNrNjMv1UDrlIBhGKMu+ZfXabgdi1rYMruQ56rMEoXZkpAhCelRlLtKBcgQK6/qEnRNu0u3/5G5fmE6XZDF0JTidQNjZHJKDIkP3jG34rmiz98ynn5ff3Z33rndudHV+Q/yzxGMvObdzLE3Sl/eaFh+Q0ahPt1AgcvJrzQJOsPojfTcYirxzutjNt6TvGV12ta1oNSta1KirLWpf1+T8udVsx66I+UnCxNK9GlGKg/yCnArAUOuAP6hIPYN81JM+dpinbaEUqSPqihtsdKYX6A15ieZdBnKr9XG/bp0rAUyGEwGhmj8wWiJpgxjP9+dVBPQxwTXALM37OAMS6+nQVPS08b/AQrfsZKD7WE3AAAAAElFTkSuQmCC" alt="">
+    </div>
+
+    <div class="basis-1/3 text-sm text-white text-center">30 Dec 2019</div>
   </header>
   <main class="flex flex-col pt-12">
     <section class="flex flex-col">
-      <div class="text-base">Videos</div>
-      <div class="text-3xl font-bold mt-2">Youtube</div>
-    </section>
-    <section class="flex flex-row mt-4">
-      <div class="basis-1/3">
-        <h5 class="text-sm text-gray-700">Rating</h5>
-        <h4 class="text-lg font-bold mt-1">5.0</h4>
-      </div>
-      <div class="basis-1/3">
-        <h5 class="text-sm text-gray-700">Size</h5>
-        <h4 class="text-lg font-bold mt-1">95.0 mb</h4>
-      </div>
-      <div class="basis-1/3">
-        <h5 class="text-sm text-gray-700">Downloads</h5>
-        <h4 class="text-lg font-bold mt-1">13.3m</h4>
-      </div>
-    </section>
+      <div class="text-xs text-white">Silver Winner</div>
+      <div class="mt-2 text-xl text-white font-300">UMO UX India Award</div>
+      <div class="mt-2 text-xl text-white font-300">2020-21</div>
   </main>
   <footer class="pt-10">
     <div class="flex flex-row items-center justify-start">
-      <div class="basis-10">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M21 7.5V18M15 7.5V18M3 16.811V8.69c0-.864.933-1.406 1.683-.977l7.108 4.061a1.125 1.125 0 010 1.954l-7.108 4.061A1.125 1.125 0 013 16.811z" />
-        </svg>
-
-      </div>
-      <div class="basis-20 text-xs">30 mb/sec</div>
+      <div class="text-sm text-white">Hyderobat, India</div>
     </div>
 
   </footer>
