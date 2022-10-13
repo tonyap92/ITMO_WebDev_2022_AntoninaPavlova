@@ -6,21 +6,69 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
   <title>Vite App Welcome</title>
 
-  <script src="https://jspm.dev/@spectrum-web-components/bundle/elements.js" type="module" async></script>
   <link type="text/css" rel="stylesheet" href="./style.css">
 </head>
-<body>
-<sp-theme scale="large" color="dark">
-  <!-- Insert content requiring theme application here. -->
-  <div class="p-4">
-    <sp-field-label for="tel-1">Email</sp-field-label>
-    <sp-textfield type="email" placeholder="Enter your email"></sp-textfield>
 
-    <sp-field-label for="password-1">Password</sp-field-label>
-    <sp-textfield type="password" placeholder="Password"></sp-textfield>
+<body>
+
+<div class="max-w-full w-full my-0 mx-auto text-black bg-white box-border overflow-hidden">
+  <div class="max-w-screen-2xl w-full my-0 mx-auto relative">
+    <header class="relative top-0 right-0 left-0 h-auto mb-16 pt-6 px-20 flex">
+      <div class="max-w-xl w-full pr-8 flex items-center justify-between left">
+        <div>
+          <img src="img/logo.svg" alt="">
+        </div>
+        <div>
+          <a class="relative px-6 text-base before:absolute before:top-0 before:right-0 before:content-['∨']"
+             href="">Features</a>
+          <a class="relative px-6 text-base before:absolute before:top-0 before:right-0 before:content-['∨']"
+             href="">Company</a>
+          <a class="px-6 text-base" href="">Careers</a>
+          <a class="px-6 text-base" href="">About</a>
+        </div>
+      </div>
+
+      <div class="flex flex-auto items-center justify-end">
+        <a class="px-10 text-base" href="http://" target="_blank">Login</a>
+        <a class="flex items-center justify-center px-6 py-2 text-base border-2 border-gray-500 rounded-2xl"
+           href="http://" target="_blank">Register</a>
+      </div>
+    </header>
+
+    <main class="max-w-screen-xl w-full my-0 mx-auto mb-32">
+      <div class="grid grid-cols-2 gap-x-16 items-end justify-items-center">
+        <div>
+          <h1 class="text-7xl font-bold">Make <br> remote work</h1>
+          <p class="py-14 text-lg font-bold tracking-wider left">Get you team in sync. no matter in location. <br>
+            Streamline processes, create team rituals, and <br>
+            watch productivity soar.
+          </p>
+          <a class="max-w-fit mb-28 flex items-center justify-center px-10 py-3.5 text-md font-bold text-white bg-black border-2 border-gray-500 rounded-2xl hover:bg-white hover:text-black"
+             href="http://" target="_blank">Learn more</a>
+          <div class="w-11/12 grid grid-cols-4 items-center">
+            <div>
+              <img class="my-0 mx-auto"  src="img/client-databiz.svg">
+            </div>
+            <div>
+              <img class="my-0 mx-auto"  src="img/client-audiophile.svg">
+            </div>
+            <div>
+              <img class="my-0 mx-auto"  src="img/client-meet.svg">
+            </div>
+            <div>
+              <img class="my-0 mx-auto"  src="img/client-maker.svg">
+            </div>
+          </div>
+
+        </div>
+        <div class="w-9/12">
+          <img src="img/image-hero-desktop.png">
+        </div>
+      </div>
+    </main>
   </div>
-  <sp-button onclick="alert('I was clicked');">Click me!</sp-button>
-  <!-- End content requiring theme application. -->
-</sp-theme>
+</div>
 </body>
+
+
 </html>
