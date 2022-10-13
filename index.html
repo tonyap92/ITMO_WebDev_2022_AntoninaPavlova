@@ -1,13 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/main.js"></script>
-  </body>
+<head>
+  <meta charset="UTF-8"/>
+  <link href="/vite.svg" rel="icon" type="image/svg+xml"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Vite App Welcome</title>
+  <link type="text/css" rel="stylesheet" href="./style.css">
+</head>
+<body class="bg-slate-500">
+<article class="flex flex-col w-96 bg-neutral-50 p-6 mx-auto rounded-lg mt-12 bg-hero-pattern">
+  <header class="flex flex-row justify-between items-center">
+    <span style="content: url('https://api.iconify.design/icon-park-solid/youtube.svg?color=red&width=52');">icon</span>
+    <div class="px-4 py-1 bg-green-200 text-green-500 text-xs font-bold rounded-2xl h-full">Free</div>
+  </header>
+  <main class="flex flex-col pt-12">
+    <section class="flex flex-col">
+      <div class="text-base">Videos</div>
+      <div class="text-3xl font-bold mt-2">Youtube</div>
+    </section>
+    <section class="flex flex-row mt-4">
+      <div class="basis-1/3">
+        <h5 class="text-sm text-gray-700">Rating</h5>
+        <h4 class="text-lg font-bold mt-1">5.0</h4>
+      </div>
+      <div class="basis-1/3">
+        <h5 class="text-sm text-gray-700">Size</h5>
+        <h4 class="text-lg font-bold mt-1">95.0 mb</h4>
+      </div>
+      <div class="basis-1/3">
+        <h5 class="text-sm text-gray-700">Downloads</h5>
+        <h4 class="text-lg font-bold mt-1">13.3m</h4>
+      </div>
+    </section>
+  </main>
+  <footer class="pt-10">
+    <div class="flex flex-row items-center justify-start">
+      <div class="basis-10">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M21 7.5V18M15 7.5V18M3 16.811V8.69c0-.864.933-1.406 1.683-.977l7.108 4.061a1.125 1.125 0 010 1.954l-7.108 4.061A1.125 1.125 0 013 16.811z" />
+        </svg>
+
+      </div>
+      <div class="basis-20 text-xs">30 mb/sec</div>
+    </div>
+
+  </footer>
+</article>
+</body>
 </html>
