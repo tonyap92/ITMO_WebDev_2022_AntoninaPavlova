@@ -1,3 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@media screen and (min-width: 768px) {
+    .grid-cols-md {
+        grid-template-columns: 15% 1fr 23%;
+    }
+
+}
+
+@media screen and (min-width: 1280px) {
+    .grid-cols-md {
+        grid-template-columns: 9% 75% 15%;
+    }
+
+}
