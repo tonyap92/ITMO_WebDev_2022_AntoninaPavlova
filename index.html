@@ -12,40 +12,44 @@
 <body>
 
 <div class="max-w-full w-full my-0 mx-auto text-black bg-white box-border overflow-hidden">
-  <div class="max-w-screen-2xl w-full my-0 mx-auto relative">
-    <header class="relative top-0 right-0 left-0 h-auto mb-16 pt-6 px-20 flex">
-      <div class="max-w-xl w-full pr-8 flex items-center justify-between left">
+  <div class="w-full my-0 mx-auto relative">
+
+    <header class="mb-3.5 pt-2 px-2 md:mb-12 md:pt-10 xl:w-11/12 xl:mx-auto xl:px-0">
+      <div class="grid grid-cols-3 gap-2 items-start text-left grid-cols-md md:items-center">
         <div>
           <img src="img/logo.svg" alt="">
         </div>
-        <div>
-          <a class="relative px-6 text-base before:absolute before:top-0 before:right-0 before:content-['∨']"
+        <div class="grid max-w-min text-gray-600 md:grid-cols-4 md:max-w-fit md:gap-4">
+          <a class="relative pr-4 text-base hover:text-black before:absolute before:top-0 before:right-0 before:content-['∨']"
              href="">Features</a>
-          <a class="relative px-6 text-base before:absolute before:top-0 before:right-0 before:content-['∨']"
+          <a class="relative pr-4 text-base hover:text-black before:absolute before:top-0 before:right-0 before:content-['∨']"
              href="">Company</a>
-          <a class="px-6 text-base" href="">Careers</a>
-          <a class="px-6 text-base" href="">About</a>
+          <a class="text-base hover:text-black" href="">Careers</a>
+          <a class="text-base hover:text-black" href="">About</a>
         </div>
-      </div>
-
-      <div class="flex flex-auto items-center justify-end">
-        <a class="px-10 text-base" href="http://" target="_blank">Login</a>
-        <a class="flex items-center justify-center px-6 py-2 text-base border-2 border-gray-500 rounded-2xl"
-           href="http://" target="_blank">Register</a>
+        <div class="max-w-min justify-self-end text-gray-600 md:grid md:max-w-fit  md:grid-cols-2 xl:gap-x-6">
+          <a class="mb-3 flex justify-center text-base hover:text-black md:mb-0 md:items-center md:justify-end"  href="http://" target="_blank">Login</a>
+          <a class="w-4/5 mx-auto flex items-center justify-center px-6 py-2 text-base hover:text-black border-2 border-gray-500 rounded-2xl xl:px-8"
+             href="http://" target="_blank">Register</a>
+        </div>
       </div>
     </header>
 
-    <main class="max-w-screen-xl w-full my-0 mx-auto mb-32">
-      <div class="grid grid-cols-2 gap-x-16 items-end justify-items-center">
-        <div>
-          <h1 class="text-7xl font-bold">Make <br> remote work</h1>
-          <p class="py-14 text-lg font-bold tracking-wider left">Get you team in sync. no matter in location. <br>
-            Streamline processes, create team rituals, and <br>
+    <main class="mb-12 lg:max-w-screen-xl lg:w-10/12 lg:my-0 lg:mx-auto lg:mb-32">
+      <div class="mx-auto pb-12 lg:hidden">
+        <img class="mx-auto" src="img/image-hero-mobile.png">
+      </div>
+
+      <div class="lg:grid lg:grid-cols-2 lg:gap-x-16 lg:items-end lg:justify-items-center">
+        <div class="text-center lg:text-left xl:pl-16">
+          <h1 class="text-4xl font-bold md:text-7xl lg:text-5xl xl:text-7xl">Make <br class="hidden xl:block">remote work</h1>
+          <p class="py-6 text-base font-bold md:text-xl xl:py-14 xl:py-14 xl:text-lg  xl:tracking-wider">Get you team in sync. no matter in <br> location.
+            Streamline processes, create <br> team rituals, and
             watch productivity soar.
           </p>
-          <a class="max-w-fit mb-28 flex items-center justify-center px-10 py-3.5 text-md font-bold text-white bg-black border-2 border-gray-500 rounded-2xl hover:bg-white hover:text-black"
+          <a class="max-w-fit mb-12 mx-auto flex items-center justify-center px-7 py-2.5 text-md font-bold text-white bg-black border-2 border-gray-500 rounded-2xl hover:bg-white hover:text-black lg:ml-0 xl:mb-28 xl:px-10 xl:py-3.5"
              href="http://" target="_blank">Learn more</a>
-          <div class="w-11/12 grid grid-cols-4 items-center">
+          <div class="w-11/12 mx-auto grid grid-cols-4 gap-4 items-center xl:ml-0">
             <div>
               <img class="my-0 mx-auto"  src="img/client-databiz.svg">
             </div>
@@ -61,8 +65,8 @@
           </div>
 
         </div>
-        <div class="w-9/12">
-          <img src="img/image-hero-desktop.png">
+        <div class="lg:w-9/12">
+          <img class="hidden lg:block"  src="img/image-hero-desktop.png">
         </div>
       </div>
     </main>
