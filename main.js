@@ -1,6 +1,7 @@
 // import './style.css'
 import javascriptLogo from "./javascript.svg";
 import { setupCounter } from "./counter.js";
+import TodoVO from "./src/model/vos/TodoVO.js";
 
 const domInpTodoTitle = document.getElementById("inpTodoTitle");
 const domBtnCreateTodo = document.getElementById("btnCreateTodo");
@@ -8,16 +9,14 @@ const domListOfTodos = document.getElementById("listOfTodos");
 
 domBtnCreateTodo.addEventListener("click", onBtnCreateTodoClick);
 
-class TodoVO {
-  constructor(id, title, date = new Date()) {
-    this.id = id;
-    this.title = title;
-    this.date = date;
-    this.isCompleted = false;
-  }
-}
+const LOCAL_LIST_OF_TODOS = "listOfTodos";
 
-const listOfTodos = [];
+const localListOfTodos = localStorage.getItem(LOCAL_LIST_OF_TODOS);
+const listOfTodos = localListOfTodos != null ? JSON.parse(localListOfTodos) : [];
+
+console.log(">Initial value -> listOfTodos", listOfTodos);
+
+renderTodoInContainer(listOfTodos, domListOfTodos); //рендеринг
 
 // domInpTodoTitle.value = "Todo text";
 
@@ -29,11 +28,12 @@ function onBtnCreateTodoClick(e) {
   //   todoTitleValueFromDomInput
   // );
 
-  const canCreateToDo = validateToDoInputTitleValue(todoTitleValueFromDomInput);
+  // const canCreateToDo = validateToDoInputTitleValue(todoTitleValueFromDomInput);
 
   if (validateToDoInputTitleValue(todoTitleValueFromDomInput)) {
-    listOfTodos.push(createTodoVO(todoTitleValueFromDomInput));
-    renderTodoInContainer(listOfTodos, domListOfTodos);
+    listOfTodos.push(createTodoVO(todoTitleValueFromDomInput)); //добавили
+    localStorage.setItem(LOCAL_LIST_OF_TODOS, JSON.stringify(listOfTodos)); //сохранили
+    renderTodoInContainer(listOfTodos, domListOfTodos); //рендеринг
   }
 }
 
