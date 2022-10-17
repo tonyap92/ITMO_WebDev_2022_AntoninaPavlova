@@ -12,9 +12,10 @@ domBtnCreateTodo.addEventListener("click", onBtnCreateTodoClick);
 const LOCAL_LIST_OF_TODOS = "listOfTodos";
 
 const localListOfTodos = localStorage.getItem(LOCAL_LIST_OF_TODOS);
+
 const listOfTodos = localListOfTodos != null ? JSON.parse(localListOfTodos) : [];
 
-console.log(">Initial value -> listOfTodos", listOfTodos);
+// console.log(">Initial value -> listOfTodos", listOfTodos);
 
 renderTodoInContainer(listOfTodos, domListOfTodos); //рендеринг
 
@@ -37,21 +38,25 @@ function onBtnCreateTodoClick(e) {
   }
 }
 
+// Функция отвечает за вывод только строки, не чисел и чтоб input не был пустым
 function validateToDoInputTitleValue(value) {
-  const isInputValueString = typeof value === "string";
-  const isInputValueNotNumber = isNaN(parseInt(value));
+  const isInputValueString = typeof value === "string"; // проверка на строку
+  const isInputValueNotNumber = isNaN(parseInt(value)); // проверка на не число
 
   const result = isInputValueString && isInputValueNotNumber && value.length > 0;
 
   return result;
 }
 
+// Создаем константу todoId, которой присвайваем метку в мс, возвращенную в строку.
+// Создаем константу todoVO - новый "чертёж", (если вывести в консоль, будет выглядеть вот так)
 function createTodoVO(title) {
   const todoId = Date.now().toString();
   // const todoVO = new TodoVO(todoId, title);
   return new TodoVO(todoId, title);
 }
 
+// Собираем данные и выводим в <li>
 function renderTodoInContainer(list, container) {
   let output = "";
   for (let index in list) {
