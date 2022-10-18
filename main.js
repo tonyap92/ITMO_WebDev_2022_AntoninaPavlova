@@ -8,16 +8,15 @@ const domBtnCreateTodo = document.getElementById("btnCreateTodo");
 const domListOfTodos = document.getElementById("listOfTodos");
 
 domBtnCreateTodo.addEventListener("click", onBtnCreateTodoClick);
+domInpTodoTitle.addEventListener("keyup", onInpTodoTitleKeyup);
 
 const LOCAL_LIST_OF_TODOS = "listOfTodos";
+const listOfTodos = localStorageListOf(LOCAL_LIST_OF_TODOS);
 
-const localListOfTodos = localStorage.getItem(LOCAL_LIST_OF_TODOS);
+console.log(">Initial value -> listOfTodos", listOfTodos);
 
-const listOfTodos = localListOfTodos != null ? JSON.parse(localListOfTodos) : [];
-
-// console.log(">Initial value -> listOfTodos", listOfTodos);
-
-renderTodoInContainer(listOfTodos, domListOfTodos); //рендеринг
+renderTodoListInContainer(listOfTodos, domListOfTodos); //рендеринг
+disabledButtonWhenTextInvalid(domBtnCreateTodo, domInpTodoTitle.value, isStringNotNumberAndNotEmpty);
 
 // domInpTodoTitle.value = "Todo text";
 
@@ -31,33 +30,57 @@ function onBtnCreateTodoClick(e) {
 
   // const canCreateToDo = validateToDoInputTitleValue(todoTitleValueFromDomInput);
 
-  if (validateToDoInputTitleValue(todoTitleValueFromDomInput)) {
-    listOfTodos.push(createTodoVO(todoTitleValueFromDomInput)); //добавили
+  if (isStringNotNumberAndNotEmpty(todoTitleValueFromDomInput)) {
+    listOfTodos.push(TodoVO.createFromTitle(todoTitleValueFromDomInput)); //добавили
     localStorage.setItem(LOCAL_LIST_OF_TODOS, JSON.stringify(listOfTodos)); //сохранили
-    renderTodoInContainer(listOfTodos, domListOfTodos); //рендеринг
+    renderTodoListInContainer(listOfTodos, domListOfTodos); //рендеринг
   }
 }
 
-// Функция отвечает за вывод только строки, не чисел и чтоб input не был пустым
-function validateToDoInputTitleValue(value) {
-  const isInputValueString = typeof value === "string"; // проверка на строку
-  const isInputValueNotNumber = isNaN(parseInt(value)); // проверка на не число
+function onInpTodoTitleKeyup(event) {
+  console.log("> onInpTodoTitleKeyup:", event);
+  const inputValue = event.currentTarget.value;
+  console.log("> onInpTodoTitleKeyup:", inputValue);
 
-  const result = isInputValueString && isInputValueNotNumber && value.length > 0;
+  disabledButtonWhenTextInvalid(domBtnCreateTodo, inputValue, isStringNotNumberAndNotEmpty);
+}
+
+// Функция отвечает за вывод только строки, не чисел и чтоб input не был пустым
+function isStringNotNumberAndNotEmpty(value) {
+  const isValueString = typeof value === "string"; // проверка на строку
+  const isValueNotNumber = isNaN(parseInt(value)); // проверка на не число
+
+  const result = isValueString && isValueNotNumber && value.length > 0;
 
   return result;
 }
 
-// Создаем константу todoId, которой присвайваем метку в мс, возвращенную в строку.
-// Создаем константу todoVO - новый "чертёж", (если вывести в консоль, будет выглядеть вот так)
-function createTodoVO(title) {
-  const todoId = Date.now().toString();
-  // const todoVO = new TodoVO(todoId, title);
-  return new TodoVO(todoId, title);
+function localStorageListOf(key) {
+  const value = localStorage.getItem(key);
+  console.log();
+
+  if (value == null) return [];
+
+  const parsedValue = JSON.parse(value);
+  const isParsedValueArray = Array.isArray(parsedValue);
+
+  return isParsedValueArray ? parsedValue : [];
+}
+
+function disabledButtonWhenTextInvalid(button, text, validateTextFunction) {
+  if (!validateTextFunction) throw new Error("Validate method must be defined");
+
+  if (validateTextFunction(text)) {
+    button.disabled = false;
+    button.textContent = "Create";
+  } else {
+    button.disabled = true;
+    button.textContent = "Enter text";
+  }
 }
 
 // Собираем данные и выводим в <li>
-function renderTodoInContainer(list, container) {
+function renderTodoListInContainer(list, container) {
   let output = "";
   for (let index in list) {
     output += `<li>${listOfTodos[index].title}</li>`;
