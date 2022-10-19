@@ -2,7 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-@media screen and (min-width: 768px) {
+
+@media screen and (min-width: 1024px) {
     .grid-cols-md {
         grid-template-columns: 15% 1fr 23%;
     }
@@ -14,4 +15,32 @@
         grid-template-columns: 9% 75% 15%;
     }
 
+}
+
+.hamburger {
+    position: fixed;
+    z-index: 100;
+    right: 1rem;
+    background: white;
+    cursor: pointer;
+}
+
+.closeIcon {
+    display: none;
+}
+
+.menu {
+    position: fixed;
+    transform: translateX(200%);
+    transition: transform 0.2s;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 99;
+    background: white;
+}
+
+.showMenu {
+    transform: translateX(100%);
 }
