@@ -16,16 +16,16 @@ domBtnCreateTodo.addEventListener("click", onBtnCreateTodoClick); // событ�
 domInpTodoTitle.addEventListener("keyup", onInpTodoTitleKeyup); // событие срабатывает, когда клавиша была отпущена
 domListOfTodos.addEventListener("change", onTodoListChange); // событие срабатывает, когда пользователь изменяет значение элемента
 
-const LOCAL_LIST_OF_TODOS = "listOfTodos"; // константа со строкой listOfTodos
-const LOCAL_INPUT_TEXT = "inputText";
+const LOCAL_LIST_OF_TODOS = "listOfTodos"; // константа со строкой listOfTodos (надпись отображается в key localStorage)
+const LOCAL_INPUT_TEXT = "inputText"; // константа со строкой inputText (надпись отображается в key localStorage)
 
 const listOfTodos = localStorageListOf(LOCAL_LIST_OF_TODOS); // константа в которой запускам функции, которая отвечает за проверку данных из локального хранилища на объект
-
 /*console.log(">Initial value -> listOfTodos", listOfTodos);*/
 
-domInpTodoTitle.value =   localStorage.getItem(LOCAL_INPUT_TEXT);
-renderTodoListInContainer(listOfTodos, domListOfTodos); //запуск функций рендеринга
-disableOrEnableCreateTodoButtonOnTodoInputTitle()
+domInpTodoTitle.value = localStorage.getItem(LOCAL_INPUT_TEXT); // передача ключа input в localStorage
+render_TodoListInContainer(listOfTodos, domListOfTodos); //запуск функций рендеринга
+disableOrEnable_CreateTodoButtonOnTodoInputTitle() //запуск функции, которая отвечает за disable Or Enable кнопки
+
 // domInpTodoTitle.value = "Todo text";
 
 // функция, которая добавляет изменения в input при чекнутом/не чекнутом чекбоксе
@@ -42,7 +42,7 @@ function onTodoListChange(event) {
         // console.log(">onTodoListChange -> todoVO:", indexInt, todoVO);
 
         todoVO.isCompleted = !!target.checked; // isCompleted: false  = чекнут
-        saveListOfTodo() //запуск функции сохранения
+        save_ListOfTodo() //запуск функции сохранения
     }
 }
 
@@ -50,19 +50,16 @@ function onTodoListChange(event) {
 function onBtnCreateTodoClick(e) {
     // console.log("> domBtnCreateTodo -> handle(click)", e);
     const todoTitleValueFromDomInput = domInpTodoTitle.value; // переменная в которую записываем введенное значение из инпут
-    // console.log(
-    //   "> domBtnCreateTodo -> todoInputTitleValue:",
-    //   todoTitleValueFromDomInput
+    // console.log("> domBtnCreateTodo -> todoInputTitleValue:", todoTitleValueFromDomInpu
     // );
 
 
-    // const canCreateToDo = validateToDoInputTitleValue(todoTitleValueFromDomInput);
-
     if (isStringNotNumberAndNotEmpty(todoTitleValueFromDomInput)) { //если введеное значение прошло проверку на строку (запуск функции на проверку для постоянной - введеный данных в инпут)
-        listOfTodos.push(TodoVO.createFromTitle(todoTitleValueFromDomInput)); //добавляем в наш объект "listOfTodos" - class TodoVO (новый чертеж по которому мы будем хранить данные)
-        saveListOfTodo(); // запуск функции  saveListOfTodo
-        renderTodoListInContainer(listOfTodos, domListOfTodos); //выводим значение в список и в
-        domInpTodoTitle.value = ''; // очищаем значение
+        create_TodoFromTextAndAddToList (todoTitleValueFromDomInput, listOfTodos) ; //запуск функции, которая отвечает за добавление в наш объект "listOfTodos" - class TodoVO
+        save_ListOfTodo(); // запуск функции  save_ListOfTodo
+        clear_InputTextAndLocalStorage(); //запуск функции, которая отвечает за чистку input в localStorage
+        render_TodoListInContainer(listOfTodos, domListOfTodos); //выводим значение в список и в
+        disableOrEnable_CreateTodoButtonOnTodoInputTitle() //запуск функции, которая отвечает за disable Or Enable кнопки
     }
 
 }
@@ -74,12 +71,13 @@ function onInpTodoTitleKeyup(event) {
     // (event.currentTarget используется, когда один и тот же обработчик события присваивается нескольким элементам.)
    // console.log("> onInpTodoTitleKeyup:", inputValue);
 
-    localStorage.setItem(LOCAL_INPUT_TEXT, inputValue)
-    disableOrEnableCreateTodoButtonOnTodoInputTitle()}
+    localStorage.setItem(LOCAL_INPUT_TEXT, inputValue) //сохраняем ключ и значение input в localStorage
+    disableOrEnable_CreateTodoButtonOnTodoInputTitle() // запуск функции, которая отвечает за disable Or Enable кнопки
+}
 
 // функция, которая отвечает за вывод данных дел, что осуществляется перебором массива listOFTodoVO
 // и формировать на его основе выводную строку, которую запишет domListOfTodos.
-function renderTodoListInContainer(listOFTodoVO, container) {
+function render_TodoListInContainer(listOFTodoVO, container) {
     let output = ""; // очищаем всё внутри
     let todoVO; // переменная  todoVO, которой присвоим значение позже
     for (let index in listOFTodoVO) { // перебор в массиве
@@ -87,17 +85,28 @@ function renderTodoListInContainer(listOFTodoVO, container) {
         output += TodoView.createSimpleViewFromVO(index, todoVO); // запускаем функции которая отвечает за внешний вид строки и передаем значение
     }
     container.innerHTML = output; // выводим в container
-
-    localStorage.removeItem(LOCAL_INPUT_TEXT);
-    disableOrEnableCreateTodoButtonOnTodoInputTitle()
-
 }
 
-function disableOrEnableCreateTodoButtonOnTodoInputTitle () {
-    disabledButtonWhenTextInvalid(domBtnCreateTodo, domInpTodoTitle.value, isStringNotNumberAndNotEmpty); // запуск функции с активностью кнопки
+//функция, которая отвечает за добавление в наш объект "listOfTodos" - class TodoVO
+function create_TodoFromTextAndAddToList (input, listOfTodos) {
+    // console.log(input);
+    const newTodoVO = TodoVO.createFromTitle(input); //(новый чертеж по которому мы будем хранить данные)
+    listOfTodos.push(newTodoVO); //добавляем в наш объект "listOfTodos" - new class TodoVO
+}
+
+// функция, которая отвечает за чистку input в localStorage
+function clear_InputTextAndLocalStorage() {
+    domInpTodoTitle.value = ''; // очищаем значение
+    localStorage.removeItem(LOCAL_INPUT_TEXT);//удаляем сохраненое значение input в localStorage
+}
+
+// функция, которая отвечает за disable Or Enable кнопки
+function disableOrEnable_CreateTodoButtonOnTodoInputTitle () {
+    const textToValidate = domInpTodoTitle.value; // константа в которую сохраняем то, что ввели в input
+    disabledButtonWhenTextInvalid(domBtnCreateTodo, textToValidate, isStringNotNumberAndNotEmpty); // запуск функции с активностью кнопки
 }
 
 // функция, которая отвечает за сохранение ListOfTodo
-function saveListOfTodo() {
+function save_ListOfTodo() {
     localStorageSaveListOfWithKey(LOCAL_LIST_OF_TODOS, listOfTodos); //сохранили
 }
