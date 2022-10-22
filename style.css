@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
 div {
     padding: 15px;
 }
