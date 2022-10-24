@@ -6,38 +6,50 @@ import { disabledButtonWhenTextInvalid } from "./src/utils/domUtils.js";
 import { isStringNotNumberAndNotEmpty } from "./src/utils/stringUtils.js";
 import { localStorageListOf, localStorageSaveListOfWithKey } from "./src/utils/databaseUtils.js";
 import TodoView from "./src/view/TodoView.js";
+import { forEach } from "carbon-web-components/es/globals/internal/collection-helpers.js";
 
 const domInpTodoTitle = document.getElementById("inpTodoTitle"); // инпут
 const domBtnCreateTodo = document.getElementById("btnCreateTodo"); // кнопка
 const domListOfTodos = document.getElementById("listOfTodos"); // список
 
-let selectedTodoVO = null;
-let selectedTodoViewItem = null;
+// console.log(activeItemListOfTodos);
+
+let selectedTodoVO = null; // переменная ничего не содержит
+let selectedTodoViewItem = null; // переменная ничего не содержит
 
 // отслеживание событий у элементов и выполнение функции после события
 domBtnCreateTodo.addEventListener("click", onBtnCreateTodoClick); // событие срабатывает по клику
 domInpTodoTitle.addEventListener("keyup", onInpTodoTitleKeyup); // событие срабатывает, когда клавиша была отпущена
 domListOfTodos.addEventListener("change", onTodoListChange); // событие срабатывает, когда пользователь изменяет значение элемента
-
 domListOfTodos.addEventListener("click", (event) => {
   console.log(">domListOfTodos click-> event", event.target);
   console.log(">domListOfTodos click-> :", event.dataset);
-  if (event.target.dataset["type"] !== TodoView.TODO_VIEW_ITEM) return;
+  if (event.target.dataset["type"] !== TodoView.TODO_VIEW_ITEM) return; //data-type не todoitem возвращаем
 
-  if (selectedTodoViewItem != null) resetSelectedTodo();
-  selectedTodoViewItem = event.target;
+  if (selectedTodoViewItem != null) resetSelectedTodo(); //запуск функции, которая отвечает за чистку input в localStorage// если строка листа не нуль, то запускаем функцию сброса (возвращает true)}
+  console.log("Я selectedTodoVO:", selectedTodoVO);
+
+  selectedTodoViewItem = event.target; // строка исходный элемент, на котором произошло событие
+
+  console.log("Я Item:", selectedTodoViewItem);
+  console.log("Я selectedTodoVO:", selectedTodoVO);
 
   if (selectedTodoVO == null) {
-    const todoID = event.target.id;
-    const todoVO = listOfTodos.find((item) => item.id === todoID);
-    console.log(">domListOfTodos click-> todoVO", todoVO);
-    domInpTodoTitle.value = todoVO.title;
-    domBtnCreateTodo.innerText = "Update";
-    selectedTodoVO = todoVO;
-    selectedTodoViewItem.style.border = "1px solid red";
+    //если массив пустой (неактивное состояние у строк листа)
+    // selectedTodoVO == null вернет true
+    const todoID = event.target.id; //константа с уникальным id
+    const todoVO = listOfTodos.find((item) => item.id === todoID); //Метод find() возвращает значение первого найденного в массиве элемента, которое удовлетворяет условию
+    // console.log(">domListOfTodos click-> todoVO", todoVO);
+    domInpTodoTitle.value = todoVO.title; //выводим то имя, которой было сохранено уже в массиве списке
+    domBtnCreateTodo.innerText = "Update"; //выводим у кнопки текст update
+    selectedTodoVO = todoVO; // selectedTodoVO передаем, тот объект, которой было сохранено уже в списке
+    // selectedTodoViewItem.style.border = "1px solid red";
+    selectedTodoViewItem.style.background = "#f5f5f5"; // меняем фон на серые
+
+    console.log("Я selectedTodoVO = todoVO", selectedTodoVO);
   } else {
-    console.log(">resetSelectedTodo-> :", event.dataset);
-    resetSelectedTodo();
+    // console.log(">resetSelectedTodo-> :", event.dataset);
+    resetSelectedTodo(); // запуск функции сброса
   }
 });
 
@@ -81,12 +93,16 @@ function onBtnCreateTodoClick(e) {
   if (isStringNotNumberAndNotEmpty(todoTitleValueFromDomInput)) {
     //если введеное значение прошло проверку на строку (запуск функции на проверку для постоянной - введеный данных в инпут)
     if (selectedTodoVO) {
-      selectedTodoVO.title = todoTitleValueFromDomInput;
-      resetSelectedTodo();
+      // если объект есть
+      selectedTodoVO.title = todoTitleValueFromDomInput; // исправленный title из списка и вернувший обратно
+      // console.log(selectedTodoVO);
+      // console.log(selectedTodoVO.title);
+      resetSelectedTodo(); // чистка
     } else {
       create_TodoFromTextAndAddToList(todoTitleValueFromDomInput, listOfTodos); //запуск функции, которая отвечает за добавление в наш объект "listOfTodos" - class TodoVO
       selectedTodoVO = null;
     }
+
     save_ListOfTodo(); // запуск функции  save_ListOfTodo
     clear_InputTextAndLocalStorage(); //запуск функции, которая отвечает за чистку input в localStorage
     render_TodoListInContainer(listOfTodos, domListOfTodos); //выводим значение в список и в
@@ -95,11 +111,18 @@ function onBtnCreateTodoClick(e) {
 }
 
 function resetSelectedTodo() {
-  selectedTodoVO = null;
-  domBtnCreateTodo.innerText = "Create";
-  domInpTodoTitle.value = localStorage.getItem(LOCAL_INPUT_TEXT);
+  selectedTodoVO = null; //selectedTodoVO передаем, то имя, которой было сохранено уже в списке = null
+
+  domBtnCreateTodo.innerText = "Create"; // у кнопки выводим текст Create
+  domInpTodoTitle.value = localStorage.getItem(LOCAL_INPUT_TEXT); //добавляем значение из инпут в localStorage, то после обновления тодо он будет востановлен
+
+  // console.log("Я selectedTodoVO", selectedTodoVO);
+  // console.log("Привет, я Reset, когда selectedTodoVO = null");
+
   if (selectedTodoVO) {
-    selectedTodoViewItem.style.border = "";
+    // если selectedTodoVO true/ нуль
+    selectedTodoViewItem.style.background = "";
+    // console.log("Привет, я Reset, если selectedTodoVO не null");
   }
 }
 
