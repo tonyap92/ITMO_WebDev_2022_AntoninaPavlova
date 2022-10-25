@@ -26,7 +26,9 @@ domListOfTodos.addEventListener("click", (event) => {
   console.log(">domListOfTodos click-> :", event.dataset);
   if (event.target.dataset["type"] !== TodoView.TODO_VIEW_ITEM) return; //data-type не todoitem возвращаем
 
-  if (selectedTodoViewItem != null) resetSelectedTodo(); //запуск функции, которая отвечает за чистку input в localStorage// если строка листа не нуль, то запускаем функцию сброса (возвращает true)}
+  if (selectedTodoViewItem != null) resetSelectedTodo();
+  //запуск функции, которая отвечает за чистку input в localStorage// если строка листа не нуль, то запускаем функцию сброса (возвращает true)}
+
   console.log("Я selectedTodoVO:", selectedTodoVO);
 
   selectedTodoViewItem = event.target; // строка исходный элемент, на котором произошло событие
