@@ -14,46 +14,47 @@ const domListOfTodos = document.getElementById("listOfTodos"); // список
 
 // console.log(activeItemListOfTodos);
 
-let selectedTodoVO = null; // переменная ничего не содержит
-let selectedTodoViewItem = null; // переменная ничего не содержит
+// let selectedTodoVO = null; // переменная ничего не содержит
+// let selectedTodoViewItem = null; // переменная ничего не содержит
 
 // отслеживание событий у элементов и выполнение функции после события
 domBtnCreateTodo.addEventListener("click", onBtnCreateTodoClick); // событие срабатывает по клику
 domInpTodoTitle.addEventListener("keyup", onInpTodoTitleKeyup); // событие срабатывает, когда клавиша была отпущена
 domListOfTodos.addEventListener("change", onTodoListChange); // событие срабатывает, когда пользователь изменяет значение элемента
-domListOfTodos.addEventListener("click", (event) => {
-  console.log(">domListOfTodos click-> event", event.target);
-  console.log(">domListOfTodos click-> :", event.dataset);
-  if (event.target.dataset["type"] !== TodoView.TODO_VIEW_ITEM) return; //data-type не todoitem возвращаем
-
-  if (selectedTodoViewItem != null) resetSelectedTodo();
-  //запуск функции, которая отвечает за чистку input в localStorage// если строка листа не нуль, то запускаем функцию сброса (возвращает true)}
-
-  console.log("Я selectedTodoVO:", selectedTodoVO);
-
-  selectedTodoViewItem = event.target; // строка исходный элемент, на котором произошло событие
-
-  console.log("Я Item:", selectedTodoViewItem);
-  console.log("Я selectedTodoVO:", selectedTodoVO);
-
-  if (selectedTodoVO == null) {
-    //если массив пустой (неактивное состояние у строк листа)
-    // selectedTodoVO == null вернет true
-    const todoID = event.target.id; //константа с уникальным id
-    const todoVO = listOfTodos.find((item) => item.id === todoID); //Метод find() возвращает значение первого найденного в массиве элемента, которое удовлетворяет условию
-    // console.log(">domListOfTodos click-> todoVO", todoVO);
-    domInpTodoTitle.value = todoVO.title; //выводим то имя, которой было сохранено уже в массиве списке
-    domBtnCreateTodo.innerText = "Update"; //выводим у кнопки текст update
-    selectedTodoVO = todoVO; // selectedTodoVO передаем, тот объект, которой было сохранено уже в списке
-    // selectedTodoViewItem.style.border = "1px solid red";
-    selectedTodoViewItem.style.background = "#f5f5f5"; // меняем фон на серые
-
-    console.log("Я selectedTodoVO = todoVO", selectedTodoVO);
-  } else {
-    // console.log(">resetSelectedTodo-> :", event.dataset);
-    resetSelectedTodo(); // запуск функции сброса
-  }
-});
+// domListOfTodos.addEventListener("click", (event) => {
+//   console.log(">domListOfTodos click-> event", event.target);
+//   console.log(">domListOfTodos click-> :", event.dataset);
+//   if (event.target.dataset["type"] !== TodoView.TODO_VIEW_ITEM) return; //data-type не todoitem возвращаем
+//
+//   if (selectedTodoViewItem != null) resetSelectedTodo();
+//   //запуск функции, которая отвечает за чистку input в localStorage// если строка листа не нуль, то запускаем функцию сброса (возвращает true)}
+//
+//   console.log("Я selectedTodoVO:", selectedTodoVO);
+//
+//   selectedTodoViewItem = event.target; // строка исходный элемент, на котором произошло событие
+//
+//   console.log("Я Item:", selectedTodoViewItem);
+//   console.log("Я selectedTodoVO:", selectedTodoVO);
+//
+//   if (selectedTodoVO == null) {
+//     //если массив пустой (неактивное состояние у строк листа)
+//     // selectedTodoVO == null вернет true
+//     const todoID = event.target.id; //константа с уникальным id
+//     const todoVO = listOfTodos.find((item) => item.id === todoID); //Метод find() возвращает значение первого найденного в массиве элемента, которое удовлетворяет условию
+//     // console.log(">domListOfTodos click-> todoVO", todoVO);
+//     domInpTodoTitle.value = todoVO.title; //выводим то имя, которой было сохранено уже в массиве списке
+//     domBtnCreateTodo.innerText = "Update"; //выводим у кнопки текст update
+//     selectedTodoVO = todoVO; // selectedTodoVO передаем, тот объект, которой было сохранено уже в списке
+//     // selectedTodoViewItem.style.border = "1px solid red";
+//     selectedTodoViewItem.style.background = "#f5f5f5"; // меняем фон на серые
+//
+//     console.log("Я selectedTodoVO = todoVO", selectedTodoVO);
+//   } else {
+//     // console.log(">resetSelectedTodo-> :", event.dataset);
+//     resetSelectedTodo(); // запуск функции сброса
+//   }
+// });
+domListOfTodos.addEventListener("click", onTodoDomItemClicked);
 
 const LOCAL_LIST_OF_TODOS = "listOfTodos"; // константа со строкой listOfTodos (надпись отображается в key localStorage)
 const LOCAL_INPUT_TEXT = "inputText"; // константа со строкой inputText (надпись отображается в key localStorage)
@@ -66,6 +67,30 @@ render_TodoListInContainer(listOfTodos, domListOfTodos); //запуск функ
 disableOrEnable_CreateTodoButtonOnTodoInputTitle(); //запуск функции, которая отвечает за disable Or Enable кнопки
 
 // domInpTodoTitle.value = "Todo text";
+
+//фильтр тех элементов которые мы хотим переключать
+function onTodoDomItemClicked(event) {
+  const domElement = event.target;
+  console.log(">domListOfTodos click-> event", event.target);
+  if (domElement.dataset["type"] !== TodoView.TODO_VIEW_ITEM) return; //data-type не todoitem возвращаем, если нет ключа, то прерываем.
+
+  const SELECTED_ITEM_BACKGROUND_KEY = "lightgray";
+  const todoId = domElement.id;
+
+  //vo - элемент массива
+
+  const todoVO = listOfTodos.find((vo) => vo.id === todoId);
+
+  const isSelected = domElement.style.backgroundColor === SELECTED_ITEM_BACKGROUND_KEY;
+
+  if (isSelected) {
+    domInpTodoTitle.value = "";
+    domElement.style.backgroundColor = "";
+  } else {
+    domInpTodoTitle.value = todoVO.title;
+    domElement.style.backgroundColor = SELECTED_ITEM_BACKGROUND_KEY;
+  }
+}
 
 // функция, которая добавляет изменения в input при чекнутом/не чекнутом чекбоксе
 function onTodoListChange(event) {
@@ -102,29 +127,14 @@ function onBtnCreateTodoClick(e) {
       resetSelectedTodo(); // чистка
     } else {
       create_TodoFromTextAndAddToList(todoTitleValueFromDomInput, listOfTodos); //запуск функции, которая отвечает за добавление в наш объект "listOfTodos" - class TodoVO
-      selectedTodoVO = null;
+      // selectedTodoVO = null;
+      clear_InputTextAndLocalStorage(); //запуск функции, которая отвечает за чистку input в localStorage
     }
 
     save_ListOfTodo(); // запуск функции  save_ListOfTodo
-    clear_InputTextAndLocalStorage(); //запуск функции, которая отвечает за чистку input в localStorage
+    // clear_InputTextAndLocalStorage(); //запуск функции, которая отвечает за чистку input в localStorage
     render_TodoListInContainer(listOfTodos, domListOfTodos); //выводим значение в список и в
     disableOrEnable_CreateTodoButtonOnTodoInputTitle(); //запуск функции, которая отвечает за disable Or Enable кнопки
-  }
-}
-
-function resetSelectedTodo() {
-  selectedTodoVO = null; //selectedTodoVO передаем, то имя, которой было сохранено уже в списке = null
-
-  domBtnCreateTodo.innerText = "Create"; // у кнопки выводим текст Create
-  domInpTodoTitle.value = localStorage.getItem(LOCAL_INPUT_TEXT); //добавляем значение из инпут в localStorage, то после обновления тодо он будет востановлен
-
-  // console.log("Я selectedTodoVO", selectedTodoVO);
-  // console.log("Привет, я Reset, когда selectedTodoVO = null");
-
-  if (selectedTodoVO) {
-    // если selectedTodoVO true/ нуль
-    selectedTodoViewItem.style.background = "";
-    // console.log("Привет, я Reset, если selectedTodoVO не null");
   }
 }
 
@@ -151,6 +161,22 @@ function render_TodoListInContainer(listOFTodoVO, container) {
   }
   container.innerHTML = output; // выводим в container
 }
+
+// function resetSelectedTodo() {
+//   selectedTodoVO = null; //selectedTodoVO передаем, то имя, которой было сохранено уже в списке = null
+//
+//   domBtnCreateTodo.innerText = "Create"; // у кнопки выводим текст Create
+//   domInpTodoTitle.value = localStorage.getItem(LOCAL_INPUT_TEXT); //добавляем значение из инпут в localStorage, то после обновления тодо он будет востановлен
+//
+//   console.log("Я selectedTodoVO", selectedTodoVO);
+//   // console.log("Привет, я Reset, когда selectedTodoVO = null");
+//
+//   if (selectedTodoVO) {
+//     // если selectedTodoVO true/ нуль
+//     selectedTodoViewItem.style.background = "";
+//     // console.log("Привет, я Reset, если selectedTodoVO не null");
+//   }
+// }
 
 //функция, которая отвечает за добавление в наш объект "listOfTodos" - class TodoVO
 function create_TodoFromTextAndAddToList(input, listOfTodos) {
