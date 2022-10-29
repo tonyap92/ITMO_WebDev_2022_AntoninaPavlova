@@ -1,175 +1,85 @@
-// import './style.css'
-import javascriptLogo from "./javascript.svg";
-import { setupCounter } from "./counter.js";
-import TodoVO from "./src/model/vos/TodoVO.js";
-import { disabledButtonWhenTextInvalid } from "./src/utils/domUtils.js";
-import { isStringNotNumberAndNotEmpty } from "./src/utils/stringUtils.js";
-import { localStorageListOf, localStorageSaveListOfWithKey } from "./src/utils/databaseUtils.js";
-import TodoView from "./src/view/TodoView.js";
-import { forEach } from "carbon-web-components/es/globals/internal/collection-helpers.js";
+const canvas = document.createElement("canvas");
 
-const domInpTodoTitle = document.getElementById("inpTodoTitle"); // инпут
-const domBtnCreateTodo = document.getElementById("btnCreateTodo"); // кнопка
-const domListOfTodos = document.getElementById("listOfTodos"); // список
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 
-// console.log(activeItemListOfTodos);
+canvas.style.background = "#f1f1f1";
 
-let selectedTodoVO = null; // переменная ничего не содержит
-let selectedTodoViewItem = null; // переменная ничего не содержит
+document.getElementById("app").append(canvas);
 
-// отслеживание событий у элементов и выполнение функции после события
-domBtnCreateTodo.addEventListener("click", onBtnCreateTodoClick); // событие срабатывает по клику
-domInpTodoTitle.addEventListener("keyup", onInpTodoTitleKeyup); // событие срабатывает, когда клавиша была отпущена
-domListOfTodos.addEventListener("change", onTodoListChange); // событие срабатывает, когда пользователь изменяет значение элемента
-domListOfTodos.addEventListener("click", (event) => {
-  console.log(">domListOfTodos click-> event", event.target);
-  console.log(">domListOfTodos click-> :", event.dataset);
-  if (event.target.dataset["type"] !== TodoView.TODO_VIEW_ITEM) return; //data-type не todoitem возвращаем
+const ctx = canvas.getContext("2d");
 
-  if (selectedTodoViewItem != null) resetSelectedTodo(); //запуск функции, которая отвечает за чистку input в localStorage// если строка листа не нуль, то запускаем функцию сброса (возвращает true)}
-  console.log("Я selectedTodoVO:", selectedTodoVO);
-
-  selectedTodoViewItem = event.target; // строка исходный элемент, на котором произошло событие
-
-  console.log("Я Item:", selectedTodoViewItem);
-  console.log("Я selectedTodoVO:", selectedTodoVO);
-
-  if (selectedTodoVO == null) {
-    //если массив пустой (неактивное состояние у строк листа)
-    // selectedTodoVO == null вернет true
-    const todoID = event.target.id; //константа с уникальным id
-    const todoVO = listOfTodos.find((item) => item.id === todoID); //Метод find() возвращает значение первого найденного в массиве элемента, которое удовлетворяет условию
-    // console.log(">domListOfTodos click-> todoVO", todoVO);
-    domInpTodoTitle.value = todoVO.title; //выводим то имя, которой было сохранено уже в массиве списке
-    domBtnCreateTodo.innerText = "Update"; //выводим у кнопки текст update
-    selectedTodoVO = todoVO; // selectedTodoVO передаем, тот объект, которой было сохранено уже в списке
-    // selectedTodoViewItem.style.border = "1px solid red";
-    selectedTodoViewItem.style.background = "#f5f5f5"; // меняем фон на серые
-
-    console.log("Я selectedTodoVO = todoVO", selectedTodoVO);
-  } else {
-    // console.log(">resetSelectedTodo-> :", event.dataset);
-    resetSelectedTodo(); // запуск функции сброса
-  }
-});
-
-const LOCAL_LIST_OF_TODOS = "listOfTodos"; // константа со строкой listOfTodos (надпись отображается в key localStorage)
-const LOCAL_INPUT_TEXT = "inputText"; // константа со строкой inputText (надпись отображается в key localStorage)
-
-const listOfTodos = localStorageListOf(LOCAL_LIST_OF_TODOS); // константа в которой запускам функции, которая отвечает за проверку данных из локального хранилища на объект
-/*console.log(">Initial value -> listOfTodos", listOfTodos);*/
-
-domInpTodoTitle.value = localStorage.getItem(LOCAL_INPUT_TEXT); // передача ключа input в localStorage
-render_TodoListInContainer(listOfTodos, domListOfTodos); //запуск функций рендеринга
-disableOrEnable_CreateTodoButtonOnTodoInputTitle(); //запуск функции, которая отвечает за disable Or Enable кнопки
-
-// domInpTodoTitle.value = "Todo text";
-
-// функция, которая добавляет изменения в input при чекнутом/не чекнутом чекбоксе
-function onTodoListChange(event) {
-  // console.log(">onTodoListChange -> event:", event.target);
-
-  const target = event.target; // ссылкается на кликнутый чекбокс
-  const index = target.id; // присвайваем id значение index
-
-  if (index && typeof index === "string") {
-    // проверка индекса на строку
-    const indexInt = parseInt(index.trim()); // parseInt преобразует первый переданный ей аргумент в строковый тип, интерпретирует его и возвращает целое число. Метод trim() удаляет пробельные символы с начала и конца строки
-    const todoVO = listOfTodos[indexInt]; // изменяется состояние isCompleted: при чекнутом или нечекнутом чекбоксе
-
-    // console.log(">onTodoListChange -> todoVO:", indexInt, todoVO);
-
-    todoVO.isCompleted = !!target.checked; // isCompleted: false  = чекнут
-    save_ListOfTodo(); //запуск функции сохранения
+class Position {
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
   }
 }
 
-// функция, которая запускается по клику кнопки
-function onBtnCreateTodoClick(e) {
-  // console.log("> domBtnCreateTodo -> handle(click)", e);
-  const todoTitleValueFromDomInput = domInpTodoTitle.value; // переменная в которую записываем введенное значение из инпут
-  // console.log("> domBtnCreateTodo -> todoInputTitleValue:", todoTitleValueFromDomInput);
+class Planet {
+  constructor(color, atmosphere, position, size) {
+    this.color = color;
+    this.atmosphere = atmosphere;
+    this.position = position;
+    this.size = size;
+  }
 
-  if (isStringNotNumberAndNotEmpty(todoTitleValueFromDomInput)) {
-    //если введеное значение прошло проверку на строку (запуск функции на проверку для постоянной - введеный данных в инпут)
-    if (selectedTodoVO) {
-      // если объект есть
-      selectedTodoVO.title = todoTitleValueFromDomInput; // исправленный title из списка и вернувший обратно
-      // console.log(selectedTodoVO);
-      // console.log(selectedTodoVO.title);
-      resetSelectedTodo(); // чистка
-    } else {
-      create_TodoFromTextAndAddToList(todoTitleValueFromDomInput, listOfTodos); //запуск функции, которая отвечает за добавление в наш объект "listOfTodos" - class TodoVO
-      selectedTodoVO = null;
-    }
-
-    save_ListOfTodo(); // запуск функции  save_ListOfTodo
-    clear_InputTextAndLocalStorage(); //запуск функции, которая отвечает за чистку input в localStorage
-    render_TodoListInContainer(listOfTodos, domListOfTodos); //выводим значение в список и в
-    disableOrEnable_CreateTodoButtonOnTodoInputTitle(); //запуск функции, которая отвечает за disable Or Enable кнопки
+  render(ctx) {
+    ctx.fillStyle = this.color;
+    ctx.beginPath();
+    ctx.strokeStyle = this.atmosphere;
+    // ctx.lineWidth = 10;
+    ctx.arc(this.position.x, this.position.y, this.size, 0, 2 * Math.PI);
+    ctx.stroke();
+    ctx.fill();
   }
 }
 
-function resetSelectedTodo() {
-  selectedTodoVO = null; //selectedTodoVO передаем, то имя, которой было сохранено уже в списке = null
-
-  domBtnCreateTodo.innerText = "Create"; // у кнопки выводим текст Create
-  domInpTodoTitle.value = localStorage.getItem(LOCAL_INPUT_TEXT); //добавляем значение из инпут в localStorage, то после обновления тодо он будет востановлен
-
-  // console.log("Я selectedTodoVO", selectedTodoVO);
-  // console.log("Привет, я Reset, когда selectedTodoVO = null");
-
-  if (selectedTodoVO) {
-    // если selectedTodoVO true/ нуль
-    selectedTodoViewItem.style.background = "";
-    // console.log("Привет, я Reset, если selectedTodoVO не null");
+class Sun extends Planet {
+  constructor(position) {
+    super("red", "yellow", position, 100);
   }
 }
 
-// функция, котороая отвечает за последующие действия с введенным в инпут значением, после отпущеной клавиши
-function onInpTodoTitleKeyup(event) {
-  /* console.log("> onInpTodoTitleKeyup:", event);*/
-  const inputValue = event.currentTarget.value; //константа, которой присвоили значение введеное в инпут, когда клавиша была отпущена
-  // (event.currentTarget используется, когда один и тот же обработчик события присваивается нескольким элементам.)
-  // console.log("> onInpTodoTitleKeyup:", inputValue);
-
-  localStorage.setItem(LOCAL_INPUT_TEXT, inputValue); //сохраняем ключ и значение input в localStorage
-  disableOrEnable_CreateTodoButtonOnTodoInputTitle(); // запуск функции, которая отвечает за disable Or Enable кнопки
-}
-
-// функция, которая отвечает за вывод данных дел, что осуществляется перебором массива listOFTodoVO
-// и формировать на его основе выводную строку, которую запишет domListOfTodos.
-function render_TodoListInContainer(listOFTodoVO, container) {
-  let output = ""; // очищаем всё внутри
-  let todoVO; // переменная  todoVO, которой присвоим значение позже
-  for (let index in listOFTodoVO) {
-    // перебор в массиве
-    todoVO = listOFTodoVO[index]; // объект, чертеж -который создается после введения по клику
-    output += TodoView.createSimpleViewFromVO(index, todoVO); // запускаем функции которая отвечает за внешний вид строки и передаем значение
+class Earth extends Planet {
+  constructor(center, radius) {
+    super("green", "blue", new Position(center.x + radius, center.y + radius), 40);
+    this._radius = radius;
+    this.center = center;
+    this.alpha = 0;
   }
-  container.innerHTML = output; // выводим в container
+
+  get radius() {
+    return this._radius + this.size;
+  }
+
+  rotate() {
+    this.alpha += 0.05 / Math.PI;
+    this.position.x = this.radius * Math.sin(this.alpha) + this.center.x;
+    this.position.y = this.radius * Math.cos(this.alpha) + this.center.y;
+    if (alpha >= 2 * Math.PI) alpha = 0;
+  }
+
+  render(ctx) {
+    super.render(ctx);
+    ctx.fillStyle = "blue";
+    ctx.beginPath();
+    ctx.arc(this.position.x - 10, this.position.y, this.size / 2, 0, 2 * Math.PI);
+    ctx.fill();
+  }
 }
 
-//функция, которая отвечает за добавление в наш объект "listOfTodos" - class TodoVO
-function create_TodoFromTextAndAddToList(input, listOfTodos) {
-  // console.log(input);
-  const newTodoVO = TodoVO.createFromTitle(input); //(новый чертеж по которому мы будем хранить данные)
-  listOfTodos.push(newTodoVO); //добавляем в наш объект "listOfTodos" - new class TodoVO
-}
+const sun = new Sun(new Position(canvas.width / 2, canvas.height / 2));
+const earth = new Earth(sun.position, sun.size + 100);
 
-// функция, которая отвечает за чистку input в localStorage
-function clear_InputTextAndLocalStorage() {
-  domInpTodoTitle.value = ""; // очищаем значение
-  localStorage.removeItem(LOCAL_INPUT_TEXT); //удаляем сохраненое значение input в localStorage
-}
+let alpha = 0;
 
-// функция, которая отвечает за disable Or Enable кнопки
-function disableOrEnable_CreateTodoButtonOnTodoInputTitle() {
-  const textToValidate = domInpTodoTitle.value; // константа в которую сохраняем то, что ввели в input
-  disabledButtonWhenTextInvalid(domBtnCreateTodo, textToValidate, isStringNotNumberAndNotEmpty); // запуск функции с активностью кнопки
-}
+window.requestAnimationFrame(renderPlanets);
 
-// функция, которая отвечает за сохранение ListOfTodo
-function save_ListOfTodo() {
-  localStorageSaveListOfWithKey(LOCAL_LIST_OF_TODOS, listOfTodos); //сохранили
+function renderPlanets() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  earth.rotate();
+  earth.render(ctx);
+  sun.render(ctx);
+  window.requestAnimationFrame(renderPlanets);
 }
