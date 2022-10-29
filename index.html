@@ -1,20 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link href="/vite.svg" rel="icon" type="image/svg+xml" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Todo</title>
 
-    <link type="text/css" rel="stylesheet" href="./style.css" />
-  </head>
-  <body>
-    <div>
-      <input id="inpTodoTitle" />
-      <button id="btnCreateTodo">Create</button>
-      <ol id="listOfTodos"></ol>
-    </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
-    <script type="module" src="main.js"></script>
-  </body>
+  <title>Task1 JS</title>
+
+  <!-- Chrome, Firefox OS and Opera -->
+  <meta name="theme-color" content="#000" />
+  <!-- Windows Phone -->
+  <meta name="msapplication-navbutton-color" content="#000" />
+  <!-- iOS Safari -->
+  <meta name="apple-mobdse-web-app-status-bar-style" content="#000" />
+
+  <!-- Main -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+<form action="#">
+  <div class="input_group">
+    <label>First Name:</label>
+    <input type="text" name="first_name" id="first_name" />
+  </div>
+  <div class="input_group">
+    <label>Last Name:</label>
+    <input type="text" name="last_name" id="last_name" />
+  </div>
+  <div class="input_group">
+    <label>Full Name:</label>
+    <input type="text" name="full_name" id="full_name" disabled />
+  </div>
+</form>
+
+<!-- Script -->
+<script type="module" src="main.js"></script>
+</body>
+
 </html>
