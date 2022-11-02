@@ -1,85 +1,93 @@
-const canvas = document.createElement("canvas");
+import { Earth, Mars, Moon, PlanetComposable, Position, RotatedPlanet, Sun } from "./src/solar-system.js";
 
+const canvas = document.createElement("canvas");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
-
-canvas.style.background = "#f1f1f1";
+canvas.style.backgroundColor = "#f1f1f1";
 
 document.getElementById("app").append(canvas);
 
 const ctx = canvas.getContext("2d");
 
-class Position {
-  constructor(x, y) {
-    this.x = x;
-    this.y = y;
-  }
-}
+const sun = new Sun(new Position(canvas.width / 2, canvas.height / 2));
+const earth = new Earth(sun.position, sun.size + 100);
+const mars = new Mars(sun.position, sun.size + 250);
+const moon = new Moon(earth.position, earth.size + 30);
 
-class Planet {
-  constructor(color, atmosphere, position, size) {
+const planets = [sun, earth, moon, mars];
+
+window.requestAnimationFrame(renderPlanets);
+
+class RenderCirclePlanetAlgorithm {
+  constructor(color, atmosphere, size) {
     this.color = color;
     this.atmosphere = atmosphere;
-    this.position = position;
     this.size = size;
   }
-
-  render(ctx) {
+  render(ctx, position) {
     ctx.fillStyle = this.color;
     ctx.beginPath();
     ctx.strokeStyle = this.atmosphere;
-    // ctx.lineWidth = 10;
-    ctx.arc(this.position.x, this.position.y, this.size, 0, 2 * Math.PI);
+    ctx.arc(position.x, position.y, this.size, 0, 2 * Math.PI);
     ctx.stroke();
     ctx.fill();
   }
 }
 
-class Sun extends Planet {
-  constructor(position) {
-    super("red", "yellow", position, 100);
+class RenderSquarePlanetAlgorithm {
+  constructor(color, atmosphere, size) {
+    this.color = color;
+    this.atmosphere = atmosphere;
+    this.size = size;
   }
-}
-
-class Earth extends Planet {
-  constructor(center, radius) {
-    super("green", "blue", new Position(center.x + radius, center.y + radius), 40);
-    this._radius = radius;
-    this.center = center;
-    this.alpha = 0;
-  }
-
-  get radius() {
-    return this._radius + this.size;
-  }
-
-  rotate() {
-    this.alpha += 0.05 / Math.PI;
-    this.position.x = this.radius * Math.sin(this.alpha) + this.center.x;
-    this.position.y = this.radius * Math.cos(this.alpha) + this.center.y;
-    if (alpha >= 2 * Math.PI) alpha = 0;
-  }
-
-  render(ctx) {
-    super.render(ctx);
-    ctx.fillStyle = "blue";
+  render(ctx, position) {
+    ctx.fillStyle = this.color;
     ctx.beginPath();
-    ctx.arc(this.position.x - 10, this.position.y, this.size / 2, 0, 2 * Math.PI);
+    ctx.strokeStyle = this.atmosphere;
+    ctx.rect(position.x, position.y, this.size, this.size);
+    ctx.stroke();
     ctx.fill();
   }
 }
 
-const sun = new Sun(new Position(canvas.width / 2, canvas.height / 2));
-const earth = new Earth(sun.position, sun.size + 100);
+class MoveRotateAlgorithm {
+  constructor(radius, speed) {
+    this.radius = radius;
+    this.speed = speed;
+    this.alpha = 0;
+  }
+  move(position, offset) {
+    this.alpha += this.speed / Math.PI;
+    position.x = this.radius * Math.sin(this.alpha) + offset.x;
+    position.y = this.radius * Math.cos(this.alpha) + offset.y;
+    if (this.alpha >= 2 * Math.PI) this.alpha = 0;
+  }
+}
 
-let alpha = 0;
+const r1 = new RenderCirclePlanetAlgorithm("blue", "lightblue", 50);
+const r2 = new RenderSquarePlanetAlgorithm("red", "lightblue", 30);
 
-window.requestAnimationFrame(renderPlanets);
+const planetComposable = new PlanetComposable(new Position(100, 100), r1, new MoveRotateAlgorithm(150, 0.04));
+
+document.onclick = (e) => {
+  planetComposable.offset = new Position(e.pageX, e.pageY);
+  if (planetComposable.renderAlgorithm instanceof RenderCirclePlanetAlgorithm) {
+    planetComposable.renderAlgorithm = r2;
+  } else planetComposable.renderAlgorithm = r1;
+};
 
 function renderPlanets() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  earth.rotate();
-  earth.render(ctx);
-  sun.render(ctx);
+
+  planetComposable.render(ctx);
+  planetComposable.move();
+
+  planets.forEach((item) => {
+    if (item instanceof RotatedPlanet) {
+      item.rotate();
+    }
+    item.render(ctx);
+  });
+
   window.requestAnimationFrame(renderPlanets);
 }
