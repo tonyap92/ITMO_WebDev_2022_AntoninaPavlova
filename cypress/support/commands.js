@@ -23,3 +23,10 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add("checkInputExistAndEmpty", () => {
+  const cyInputTodoTitle = cy.get("#inpTodoTitle");
+  cyInputTodoTitle.should("exist").should("be.visible");
+  cyInputTodoTitle.should("contain.text", "");
+  cy.get("#btnCreateTodo").should("be.disabled");
+});
