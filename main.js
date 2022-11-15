@@ -16,6 +16,11 @@ let selectedTodoVO = null;
 let selectedTodoViewItem = null;
 const hasSelectedTodo = () => !!selectedTodoVO;
 
+const debug = console.log;
+console.log = (...args) => {
+  if (import.meta.env.DEV) debug(...args);
+};
+
 domBtnCreateTodo.addEventListener("click", onBtnCreateTodoClick);
 domInpTodoTitle.addEventListener("keyup", onInpTodoTitleKeyup);
 domListOfTodos.addEventListener("change", onTodoListChange);
@@ -27,6 +32,16 @@ const LOCAL_INPUT_TEXT = "inputText";
 const listOfTodos = localStorageListOf(LOCAL_LIST_OF_TODOS);
 
 console.log("> Initial value -> listOfTodos", listOfTodos);
+
+const delay = (time) =>
+  new Promise((resolve, reject) => {
+    console.log("created");
+
+    setTimeout(() => {
+      console.log("setTimeout - created");
+      resolve(time);
+    }, time);
+  });
 
 domInpTodoTitle.value = localStorage.getItem(LOCAL_INPUT_TEXT);
 render_TodoListInContainer(listOfTodos, domListOfTodos);
@@ -65,7 +80,7 @@ function onTodoListChange(event) {
   }
 }
 
-function onBtnCreateTodoClick(event) {
+async function onBtnCreateTodoClick(event) {
   // console.log('> domBtnCreateTodo -> handle(click)', this.attributes);
   const todoTitle_Value_FromDomInput = domInpTodoTitle.value;
   // console.log('> domBtnCreateTodo -> todoInputTitleValue:', todoTitleValueFromDomInput);
@@ -73,11 +88,25 @@ function onBtnCreateTodoClick(event) {
   const isStringValid = isStringNotNumberAndNotEmpty(todoTitle_Value_FromDomInput);
 
   if (isStringValid) {
+    const result = await delay(1000).then((param) => {
+      console.log("param 1", param);
+      return { time: param * 2 };
+      // return param ? param * 2 : 0;
+    });
+    // .then((param) => {
+    //   console.log("param 2", param);
+    //   return `time = ${param}`;
+    // });
+    // delay(1000).then(() => {
+
+    console.log("result", result);
+
     create_TodoFromTextAndAddToList(todoTitle_Value_FromDomInput, listOfTodos);
     clear_InputTextAndLocalStorage();
     save_ListOfTodo();
     render_TodoListInContainer(listOfTodos, domListOfTodos);
     disableOrEnable_CreateTodoButtonOnTodoInputTitle();
+    // });
   }
 }
 

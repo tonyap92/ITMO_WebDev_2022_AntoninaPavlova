@@ -8,5 +8,9 @@ export default defineConfig({
     host: "local.dev",
     port: 8888,
   },
-  plugins: [mkcert()],
+  plugins: [mkcert()]
+  // esbuild: {
+  //   drop: ['debugger'],
+  //   pure: ['console.log', 'console.error', 'console.warn', 'console.debug', 'console.trace'],
+  // },
 });
