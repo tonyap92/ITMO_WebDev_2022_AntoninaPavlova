@@ -8,6 +8,8 @@
     "build": "vite build",
     "preview": "vite preview",
     "vitestui": "vitest --ui",
+    "server:simple": "simple-server dist 3000",
+    "server:json": "json-server --watch db.json --port 3003 --static dist",
     "cy:open": "yarn dev & cypress open --e2e --config-file=cypress.config.js",
     "cy:run": "yarn dev & cypress run --e2e --config-file=cypress.config.js"
   },

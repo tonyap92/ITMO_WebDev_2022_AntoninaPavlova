@@ -7,10 +7,13 @@ import { isStringNotNumberAndNotEmpty } from "./src/utils/stringUtils.js";
 import { localStorageListOf, localStorageSaveListOfWithKey } from "./src/utils/databaseUtils.js";
 import TodoView from "./src/view/TodoView.js";
 import { forEach } from "carbon-web-components/es/globals/internal/collection-helpers.js";
+import TodoServerService from "./src/services/TodoServerService.js";
 
-const domInpTodoTitle = document.getElementById("inpTodoTitle");
-const domBtnCreateTodo = document.getElementById("btnCreateTodo");
-const domListOfTodos = document.getElementById("listOfTodos");
+const $ = document.getElementById.bind(document);
+
+const domInpTodoTitle = $("inpTodoTitle");
+const domBtnCreateTodo = $("btnCreateTodo");
+const domListOfTodos = $("listOfTodos");
 
 let selectedTodoVO = null;
 let selectedTodoViewItem = null;
@@ -21,6 +24,22 @@ console.log = (...args) => {
   if (import.meta.env.DEV) debug(...args);
 };
 
+let listOfTodos = [];
+
+const todoServerService = new TodoServerService(import.meta.env.VITE_DATA_SERVER_ADDRESS);
+
+todoServerService.requestTodos().then((todoList) => {
+  console.log("> Initial env:", import.meta.env);
+  console.log("> Initial value:", todoList);
+
+  listOfTodos = todoList;
+  domInpTodoTitle.value = localStorage.getItem(LOCAL_INPUT_TEXT);
+  render_TodoListInContainer(listOfTodos, domListOfTodos);
+  disableOrEnable_CreateTodoButtonOnTodoInputTitle();
+
+  $("app").style.visibility = "visible";
+});
+
 domBtnCreateTodo.addEventListener("click", onBtnCreateTodoClick);
 domInpTodoTitle.addEventListener("keyup", onInpTodoTitleKeyup);
 domListOfTodos.addEventListener("change", onTodoListChange);
@@ -29,19 +48,9 @@ domListOfTodos.addEventListener("click", onTodoDomItemClicked);
 const LOCAL_LIST_OF_TODOS = "listOfTodos";
 const LOCAL_INPUT_TEXT = "inputText";
 
-const listOfTodos = localStorageListOf(LOCAL_LIST_OF_TODOS);
+// const listOfTodos = localStorageListOf(LOCAL_LIST_OF_TODOS);
 
 console.log("> Initial value -> listOfTodos", listOfTodos);
-
-const delay = (time) =>
-  new Promise((resolve, reject) => {
-    console.log("created");
-
-    setTimeout(() => {
-      console.log("setTimeout - created");
-      resolve(time);
-    }, time);
-  });
 
 domInpTodoTitle.value = localStorage.getItem(LOCAL_INPUT_TEXT);
 render_TodoListInContainer(listOfTodos, domListOfTodos);
@@ -88,19 +97,6 @@ async function onBtnCreateTodoClick(event) {
   const isStringValid = isStringNotNumberAndNotEmpty(todoTitle_Value_FromDomInput);
 
   if (isStringValid) {
-    const result = await delay(1000).then((param) => {
-      console.log("param 1", param);
-      return { time: param * 2 };
-      // return param ? param * 2 : 0;
-    });
-    // .then((param) => {
-    //   console.log("param 2", param);
-    //   return `time = ${param}`;
-    // });
-    // delay(1000).then(() => {
-
-    console.log("result", result);
-
     create_TodoFromTextAndAddToList(todoTitle_Value_FromDomInput, listOfTodos);
     clear_InputTextAndLocalStorage();
     save_ListOfTodo();
