@@ -1,5 +1,10 @@
-const CONST_WELCOME = "Welcome";
 const DATA_TODO_LIST_RESOURCE = "todos";
+
+function processResponse(response, methodName) {
+  console.log(`> ServerService -> ${methodName}: response.data =`, response);
+  if (response.ok === false) throw new Error(`ServerService - ${methodName}: error (${response.statusText})`);
+  return response.json();
+}
 
 class TodoServerService {
   constructor(url) {
@@ -7,21 +12,48 @@ class TodoServerService {
     this.url = url;
   }
 
+  get path() {
+    return `${this.url}/${DATA_TODO_LIST_RESOURCE}`;
+  }
+
   async requestTodos() {
     console.log(`> ServerService -> requestTodos`);
-    const listOfTodos = await fetch(`${this.url}/${DATA_TODO_LIST_RESOURCE}`, {
-      method: "GET",
+    try {
+      const listOfTodos = await fetch(this.path, {
+        method: "GET",
+      }).then((response) => processResponse(response, "requestTodos"));
+
+      console.log(`> ServerService -> requestTodos: listOfTodos =`, listOfTodos);
+      return listOfTodos;
+    } catch (error) {
+      console.log(`> ServerService -> requestTodos: error = ${error}`);
+      throw error;
+    }
+  }
+
+  async saveTodo(todoVO) {
+    console.log(`> ServerService -> saveTodo: todoVO`, todoVO);
+    return fetch(this.path, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(todoVO),
     })
-      .then((response) => {
-        console.log(`> ServerService -> requestTodos: response.data =`, response);
-        return response.ok ? response.json() : new Error("");
-      })
-      .catch((e) => {
-        console.log(`> ServerService -> requestTodos: error = ${e}`);
-        return [];
+      .then((response) => processResponse(response, "saveTodo"))
+      .catch((error) => {
+        console.log(`> ServerService -> saveTodo: error = ${error}`);
+        throw error;
       });
-    console.log(`> ServerService -> requestTodos listOfTodos=`, listOfTodos);
-    return listOfTodos;
+  }
+
+  async deleteTodo(id) {
+    return fetch(`${this.path}/${id}`, {
+      method: "DELETE",
+    })
+      .then((response) => processResponse(response, "deleteTodo"))
+      .catch((error) => {
+        console.log(`> ServerService -> deleteTodo: error = ${error}`);
+        throw error;
+      });
   }
 }
 
