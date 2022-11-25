@@ -17,7 +17,7 @@ class TodoServerService {
   }
 
   async requestTodos() {
-    console.log(`> ServerService -> requestTodos`);
+    console.log(`> ServerService -> requestTodos: ${this.path}`);
     try {
       const listOfTodos = await fetch(this.path, {
         method: "GET",

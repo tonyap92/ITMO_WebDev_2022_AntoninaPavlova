@@ -3,7 +3,7 @@ import Dom from "./src/consts/dom.js";
 import TodoVO from "./src/model/vos/TodoVO.js";
 import { disableButtonWhenTextInvalid } from "./src/utils/domUtils.js";
 import { isStringNotNumberAndNotEmpty } from "./src/utils/stringUtils.js";
-import { localStorageListOf, localStorageSaveListOfWithKey } from "./src/utils/databaseUtils.js";
+import { localStorageSaveListOfWithKey } from "./src/utils/databaseUtils.js";
 import { $, wrapDevOnlyConsoleLog } from "./src/utils/generalUtils.js";
 import TodoView from "./src/view/TodoView.js";
 import { forEach } from "carbon-web-components/es/globals/internal/collection-helpers.js";
@@ -32,8 +32,13 @@ todoServerService
     disableOrEnable_CreateTodoButtonOnTodoInputTitle();
   })
   .catch((error) => {
-    $(Dom.APP).innerText = `<div id="errorOnInit"><h1>Problem with server: </h1>
-    <p style="color:red">${error.toString()}</p></div>`;
+    $(Dom.APP).innerHTML = `
+      <div id="errorOnInit">
+        <h1>Problem with server:</h1>
+        <p style="color:red;">
+          ${error.toString()}
+        </p>
+      </div>`;
   })
   .finally(() => ($(Dom.APP).style.visibility = "visible"));
 
@@ -46,18 +51,21 @@ async function onTodoDomItemClicked(event) {
   const domElement = event.target;
   console.log("> onTodoDomItemClicked", domElement);
   if (!TodoView.isDomElementMatch(domElement)) {
-    if (TodoView.isDomElementMatchDeleteButton(domElement)) {
-      const parentNode = domElement.parentNode;
-      const deleteTodoVO = findTodoById(TodoView.getTodoIdFromDeleteButton(domElement));
-      console.log("> onTodoDomItemClicked: parentNode =", parentNode);
-      if (confirm("Delete ${deleteTodoVO.title}?")) {
-        await todoServerService
-          .deleteTodo(deleteTodoVO.id)
+    const isDeleteButton = TodoView.isDomElementDeleteButton(domElement);
+    if (isDeleteButton) {
+      const todoId = TodoView.getTodoIdFromDeleteButton(domElement);
+      console.log("> \t todoId:", todoId);
+      const todoVO = findTodoById(todoId);
+      if (todoVO && confirm(`Delete: ${todoVO.title}?`)) {
+        console.log("> \t Delete confirmed:", todoVO);
+        domElement.disabled = true;
+        todoServerService
+          .deleteTodo(todoId)
           .then(() => {
-            listOfTodos.splice(listOfTodos.indexOf(deleteTodoVO), 1);
+            listOfTodos.splice(listOfTodos.indexOf(todoVO), 1);
             render_TodoListInContainer(listOfTodos, $(Dom.LIST_OF_TODOS));
           })
-          .catch(alert);
+          .catch(() => {});
       }
     }
     return;
