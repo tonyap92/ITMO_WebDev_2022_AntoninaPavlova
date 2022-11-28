@@ -1,16 +1,22 @@
+import { fileURLToPath, URL } from "node:url";
+
 import { defineConfig } from "vite";
+import vue from "@vitejs/plugin-vue";
 import mkcert from "vite-plugin-mkcert";
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  plugins: [vue(), mkcert()],
+  resolve: {
+    alias: {
+      "@": fileURLToPath(new URL("./src", import.meta.url)),
+    },
+  },
   server: {
     https: true,
+    // host: "127.0.0.1",
+    // port: 8089,
     host: "local.dev",
     port: 8888,
   },
-  plugins: [mkcert()]
-  // esbuild: {
-  //   drop: ['debugger'],
-  //   pure: ['console.log', 'console.error', 'console.warn', 'console.debug', 'console.trace'],
-  // },
 });
