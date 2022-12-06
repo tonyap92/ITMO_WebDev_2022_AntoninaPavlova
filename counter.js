@@ -1,9 +1,11 @@
-export function setupCounter(element) {
-  let counter = 0
-  const setCounter = (count) => {
-    counter = count
-    element.innerHTML = `count is ${counter}`
+import { ref, computed } from "vue";
+import { defineStore } from "pinia";
+
+export const useCounterStore = defineStore("counter", () => {
+  const count = ref(0);
+  const doubleCount = computed(() => count.value * 2);
+  function increment() {
+    count.value++;
   }
-  element.addEventListener('click', () => setCounter(++counter))
-  setCounter(0)
-}
+  return { count, doubleCount, increment };
+});

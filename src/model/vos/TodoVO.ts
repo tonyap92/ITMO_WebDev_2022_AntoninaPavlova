@@ -1,6 +1,7 @@
 interface ITodoVO {
   get id(): string;
   isCompleted: boolean;
+  title: string;
 }
 
 class TodoVO implements ITodoVO {
