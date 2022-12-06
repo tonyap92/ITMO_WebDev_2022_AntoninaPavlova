@@ -1,4 +1,6 @@
 <template>
+
+  <keep-alive></keep-alive>
   <h1 ref="header">App Counter</h1>
   <CounterValue
       v-if="isShown"
@@ -49,7 +51,7 @@ export default {
   },
   computed: {
     isShown() {
-      return this.counter < 15;
+      return this.counter < 25;
     },
     canRenderMinusButton() {
       return this.counter > 0;
@@ -62,11 +64,12 @@ export default {
     onPlus() {
       this.counter++;
       console.log('> Counter -> onPlus:', this.counter, this);
+      if (this.counter === 15) this.$router.push('/about');
     },
     onMinus() {
       this.counter--;
       if (this.counter === 0) {
-        this.$refs.header.innerText = `Header: ${this.counter}`;
+        this.$refs.header.innerText = `App Counter: ${this.counter}`;
       }
       console.log('> Counter -> onMinus:', this.counter);
     },
