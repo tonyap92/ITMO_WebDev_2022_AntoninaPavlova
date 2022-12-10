@@ -1,7 +1,6 @@
 <template>
-
-  <keep-alive></keep-alive>
   <h1 ref="header">App Counter</h1>
+  <div>{{ isShown ? 'More than 10' : 'Less than 10' }}</div>
   <CounterValue
       v-if="isShown"
       class="counter"
@@ -10,9 +9,8 @@
       :value="counter"
       :key="obj.index"
   />
-  {{ isShown ? 'More than 10' : 'Less than 10' }}
-  <button v-on:click="onPlus">+</button>
-  <button v-if="canRenderMinusButton" @click="onMinus">-</button>
+  <vs-button style="margin-right: 0.5rem" color="warning" v-on:click="onPlus">+</vs-button>
+  <vs-button color="warning" v-if="canRenderMinusButton" @click="onMinus">-</vs-button>
 </template>
 <script>
 import CounterValue from './components/CounterValue.vue';
@@ -69,7 +67,7 @@ export default {
     onMinus() {
       this.counter--;
       if (this.counter === 0) {
-        this.$refs.header.innerText = `App Counter: ${this.counter}`;
+        this.$refs.header.innerText = `Header: ${this.counter}`;
       }
       console.log('> Counter -> onMinus:', this.counter);
     },

@@ -4,10 +4,6 @@ import AppTodo from "@/AppTodo.vue";
 import AboutView from "@/views/AboutView.vue";
 import TodoItemView from "@/views/TodoItemView.vue";
 
-const TodoId = {
-  template: "<div>ID {{ $route.params.id }}</div>",
-};
-
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [

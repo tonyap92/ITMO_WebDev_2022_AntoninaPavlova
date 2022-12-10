@@ -3,7 +3,7 @@ import { RouterLink, RouterView, useRouter, useRoute } from 'vue-router';
 import { useTodosStore } from '@/stores/todos';
 import { storeToRefs } from 'pinia';
 import { ref, Transition, KeepAlive } from 'vue';
-import Routes from "@/consts/Routes.js";
+import Routes from '@/consts/Routes.js';
 
 const todoStore = useTodosStore();
 const { numberOfTodos } = storeToRefs(todoStore);
@@ -21,8 +21,9 @@ const canRenderNumberOfTodos = ref(isCurrentRouteIndex());
 </script>
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="25" height="25" />
     <div v-if="canRenderNumberOfTodos">Todos created: {{ numberOfTodos }}</div>
+
     <div>Current route: {{ $route.path }}</div>
     <div class="wrapper">
       <nav>
@@ -33,7 +34,7 @@ const canRenderNumberOfTodos = ref(isCurrentRouteIndex());
   </header>
   <main>
     <RouterView v-slot="{ Component }">
-      <KeepAlive>
+      <KeepAlive exclude="TodoItemView">
         <component :is="Component" />
       </KeepAlive>
     </RouterView>
@@ -44,6 +45,10 @@ const canRenderNumberOfTodos = ref(isCurrentRouteIndex());
 header {
   line-height: 1.5;
   max-height: 100vh;
+}
+
+header .wrapper {
+  margin: 2rem 0;
 }
 
 .logo {
