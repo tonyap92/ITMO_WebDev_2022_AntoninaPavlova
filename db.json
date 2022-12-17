@@ -1,25 +1,3 @@
 {
-  "todos": [
-    {
-      "id": "1669639935596",
-      "title": "Write",
-      "date": "2022-11-28T12:52:15.597Z",
-      "isCompleted": false
-    },
-    {
-      "id": "1669643079934",
-      "title": "Wri",
-      "date": "2022-11-28T13:44:39.934Z",
-      "isCompleted": false
-    },
-    {
-      "id": "1669644667362",
-      "title": "read",
-      "date": "2022-11-28T14:11:07.362Z",
-      "isCompleted": false
-    }
-  ],
-  "profile": {
-    "name": "typicode"
-  }
+  "users": []
 }

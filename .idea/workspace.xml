@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="c897ce5e-575f-427e-b888-19a828713801" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.eslintrc.cjs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.storybook/main.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.storybook/preview-head.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.storybook/preview.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vscode/extensions.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/counter.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cypress.config.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cypress/e2e/example.cy.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cypress/e2e/jsconfig.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cypress/fixtures/example.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cypress/support/commands.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cypress/support/e2e.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.json" beforeDir="false" afterPath="$PROJECT_DIR$/db.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.todos.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/env.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AppCounter.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AppTodo.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/base.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/logo.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/main.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/CounterValue.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/HelloWorld.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Spinner.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/TheWelcome.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/WelcomeItem.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/__tests__/HelloWorld.spec.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/icons/IconCommunity.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/icons/IconDocumentation.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/icons/IconEcosystem.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/icons/IconSupport.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/icons/IconTooling.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/consts/Routes.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/vos/TodoVO.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/router/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stores/counter.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stores/todos.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stories/Button.stories.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stories/Button.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stories/Header.stories.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stories/Header.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stories/Introduction.stories.mdx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stories/Page.stories.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stories/Page.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stories/assets/code-brackets.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stories/assets/colors.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stories/assets/comments.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stories/assets/direction.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stories/assets/flow.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stories/assets/plugin.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stories/assets/repo.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stories/assets/stackalt.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stories/button.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stories/header.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stories/page.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/AboutView.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/HomeView.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/TodoItemView.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsconfig.config.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vite.config.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2G65fY6UbNcyGCBdKsQxbhjSh8f" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "D:/ITMO WebDev/project1",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "prettierjs.PrettierConfiguration.Package": "D:\\ITMO WebDev\\project1\\node_modules\\prettier",
+    "settings.editor.selected.configurable": "advanced.settings",
+    "ts.external.directory.path": "D:\\ITMO WebDev\\project1\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\ITMO WebDev\project1\src\components\buttons" />
+      <recent name="D:\ITMO WebDev\project1\src\views" />
+      <recent name="D:\ITMO WebDev\project1\src\stores" />
+      <recent name="D:\ITMO WebDev\project1\src\components\icons" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\ITMO WebDev\project1\src\components" />
+      <recent name="D:\ITMO WebDev\project1\src" />
+      <recent name="D:\ITMO WebDev\project1\src\utils" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c897ce5e-575f-427e-b888-19a828713801" name="Changes" comment="" />
+      <created>1665696302325</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1665696302325</updated>
+      <workItem from="1665696307078" duration="408000" />
+      <workItem from="1665696743880" duration="210000" />
+      <workItem from="1665696971651" duration="1159000" />
+      <workItem from="1665698189202" duration="2976000" />
+      <workItem from="1665701785606" duration="43000" />
+      <workItem from="1665739006194" duration="443000" />
+      <workItem from="1665760005730" duration="21933000" />
+      <workItem from="1665787145949" duration="876000" />
+      <workItem from="1665788100142" duration="234000" />
+      <workItem from="1665818638571" duration="1388000" />
+      <workItem from="1665820134440" duration="3577000" />
+      <workItem from="1665919282959" duration="5769000" />
+      <workItem from="1666037799192" duration="1344000" />
+      <workItem from="1666102879125" duration="172000" />
+      <workItem from="1666107734367" duration="10805000" />
+      <workItem from="1666120043022" duration="387000" />
+      <workItem from="1666124698624" duration="1295000" />
+      <workItem from="1666195828840" duration="11472000" />
+      <workItem from="1666208942742" duration="807000" />
+      <workItem from="1666255556666" duration="44000" />
+      <workItem from="1666255701383" duration="253000" />
+      <workItem from="1666256119694" duration="74000" />
+      <workItem from="1666280646568" duration="11218000" />
+      <workItem from="1666298068926" duration="1583000" />
+      <workItem from="1666304216594" duration="11000" />
+      <workItem from="1666366416291" duration="12572000" />
+      <workItem from="1666422850387" duration="11689000" />
+      <workItem from="1666476752858" duration="501000" />
+      <workItem from="1666477377470" duration="3614000" />
+      <workItem from="1666481052321" duration="1832000" />
+      <workItem from="1666529683862" duration="13322000" />
+      <workItem from="1666565410339" duration="2225000" />
+      <workItem from="1666598348044" duration="6533000" />
+      <workItem from="1666607826663" duration="18805000" />
+      <workItem from="1666696852594" duration="2717000" />
+      <workItem from="1666712522873" duration="9645000" />
+      <workItem from="1666735773487" duration="1396000" />
+      <workItem from="1666782613176" duration="11977000" />
+      <workItem from="1666822659663" duration="161000" />
+      <workItem from="1666897249362" duration="39000" />
+      <workItem from="1667030408325" duration="594000" />
+      <workItem from="1667031315002" duration="136000" />
+      <workItem from="1667065196069" duration="5000" />
+      <workItem from="1667066893501" duration="853000" />
+      <workItem from="1667226137040" duration="495000" />
+      <workItem from="1667396273523" duration="17000" />
+      <workItem from="1667396556814" duration="413000" />
+      <workItem from="1667397212968" duration="168000" />
+      <workItem from="1667397542547" duration="1118000" />
+      <workItem from="1667399037014" duration="70000" />
+      <workItem from="1667399224322" duration="52000" />
+      <workItem from="1667509458414" duration="604000" />
+      <workItem from="1667600877779" duration="482000" />
+      <workItem from="1667601469147" duration="503000" />
+      <workItem from="1667604570744" duration="802000" />
+      <workItem from="1667732200411" duration="6000" />
+      <workItem from="1667919367748" duration="1691000" />
+      <workItem from="1667934245735" duration="12000" />
+      <workItem from="1668010142563" duration="1036000" />
+      <workItem from="1668078029007" duration="11192000" />
+      <workItem from="1668094824124" duration="2710000" />
+      <workItem from="1668102582451" duration="4841000" />
+      <workItem from="1668346820339" duration="1431000" />
+      <workItem from="1668351448810" duration="3281000" />
+      <workItem from="1668447133637" duration="53000" />
+      <workItem from="1668447381440" duration="662000" />
+      <workItem from="1668504170915" duration="15879000" />
+      <workItem from="1668699829164" duration="600000" />
+      <workItem from="1668940994478" duration="8952000" />
+      <workItem from="1669108748378" duration="12039000" />
+      <workItem from="1669131763577" duration="9701000" />
+      <workItem from="1669296095655" duration="600000" />
+      <workItem from="1669630426402" duration="20971000" />
+      <workItem from="1669736642666" duration="10312000" />
+      <workItem from="1669895418684" duration="1034000" />
+      <workItem from="1669998860344" duration="6440000" />
+      <workItem from="1670256906665" duration="1299000" />
+      <workItem from="1670321507666" duration="9977000" />
+      <workItem from="1670341057369" duration="11963000" />
+      <workItem from="1670413073595" duration="620000" />
+      <workItem from="1670683623376" duration="4046000" />
+      <workItem from="1670837259913" duration="600000" />
+      <workItem from="1670874845117" duration="2534000" />
+      <workItem from="1670946208400" duration="831000" />
+      <workItem from="1670947063869" duration="10245000" />
+      <workItem from="1671106985628" duration="16000" />
+      <workItem from="1671133434010" duration="16000" />
+      <workItem from="1671133621500" duration="35000" />
+      <workItem from="1671134843656" duration="70000" />
+      <workItem from="1671145616747" duration="6000" />
+      <workItem from="1671183796133" duration="12000" />
+      <workItem from="1671294228867" duration="199000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
