@@ -19,6 +19,8 @@ process.on("exit", () => {
     console.log("Goodbay Node");
 })
 
+app.use('/site', express.static('public'))
+
 app.get('/', (req, res) => {
     const { name } = req.query;
     res.send(`
